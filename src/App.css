@@ -1,0 +1,80 @@
+.app {
+  min-height: 100vh;
+  background: #0f172a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding-top:90px;
+}
+
+.greeting {
+  color: #38bdf8;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 72px;
+  margin: 0;
+}
+
+h2 {
+  color: #94a3b8;
+  font-weight: 400;
+  margin-top: 20px;
+}
+
+.description {
+  margin-top: 30px;
+  line-height: 1.7;
+  font-size: 18px;
+  color: #cbd5e1;
+}
+
+.hero-btn{
+    margin-top:40px;
+
+    padding:16px 38px;
+
+    border:none;
+
+    border-radius:40px;
+
+    background:#44b8ff;
+
+    color:#061220;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:all .35s ease;
+}
+
+.hero-btn:hover{
+
+    transform:translateY(-6px) scale(1.04);
+
+    box-shadow:0 0 35px rgba(68,184,255,.45);
+}
+
+.hero-btn:hover {
+  transform: translateY(-4px);
+}
