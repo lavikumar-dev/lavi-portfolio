@@ -1,33 +1,15 @@
-import Navbar from "./components/Navbar";
-import About from "./components/About";
-import "./App.css";
+import Navbar from "./components/layout/Navbar";
+import Hero from "./components/sections/Hero";
 
 function App() {
   return (
-    <>
+    <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden">
       <Navbar />
 
-      <div className="app">
-        <div className="hero" id="home">
-          <p className="greeting">👋 Hello, I'm</p>
-
-          <h1>Lavi Kumar</h1>
-
-          <h2>Software Developer • Web Developer • Game Developer</h2>
-
-          <p className="description">
-            Welcome to my digital realm.
-            <br />
-            Building modern websites, immersive games, and innovative software.
-          </p>
-
-          <button className="hero-btn">Explore My Work</button>
-        </div>
-      </div>
-
-      {/* About Section */}
-      <About />
-    </>
+      <main>
+        <Hero />
+      </main>
+    </div>
   );
 }
 
