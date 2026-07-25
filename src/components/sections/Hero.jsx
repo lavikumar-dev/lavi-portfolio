@@ -204,28 +204,6 @@ function Hero() {
         </motion.div>
               </div>
 
-      {/* Scroll Indicator */}
-      <motion.button
-        onClick={() =>
-          document
-            .getElementById("about")
-            ?.scrollIntoView({ behavior: "smooth" })
-        }
-        animate={{
-          y: [0, 10, 0],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-        }}
-        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center text-slate-400 hover:text-cyan-400"
-      >
-        <span className="mb-2 text-xs tracking-[0.35em]">
-          SCROLL
-        </span>
-
-        <FaArrowDown className="text-xl" />
-      </motion.button>
     </section>
   );
 }
