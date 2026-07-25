@@ -5,20 +5,18 @@ import { portfolio } from "../../data/portfolio";
 
 import SectionHeader from "../ui/SectionHeader";
 import ProjectCard from "../ui/ProjectCard";
-import CaseStudyModal from "../ui/CaseStudyModal";
+import CaseStudyModal from "../ui/case-study/CaseStudyModal";
 
 function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
 
   const openCaseStudy = (project) => {
-    setSelectedProject(project);
-    document.body.style.overflow = "hidden";
-  };
+  setSelectedProject(project);
+};
 
-  const closeCaseStudy = () => {
-    setSelectedProject(null);
-    document.body.style.overflow = "auto";
-  };
+const closeCaseStudy = () => {
+  setSelectedProject(null);
+};
 
   return (
     <>
@@ -91,10 +89,12 @@ function Projects() {
         </div>
 
       </section>
-            <CaseStudyModal
-        project={selectedProject}
-        onClose={closeCaseStudy}
-      />
+           {selectedProject && (
+  <CaseStudyModal
+    project={selectedProject}
+    onClose={closeCaseStudy}
+  />
+)}
     </>
   );
 }
