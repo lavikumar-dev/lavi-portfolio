@@ -70,7 +70,7 @@ const closeCaseStudy = () => {
             className="mt-24"
           >
 
-            <div className="space-y-36">
+            <div className="space-y-44">
 
               {portfolio.projects.map((project, index) => (
 
