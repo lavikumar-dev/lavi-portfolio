@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
+import CursorParticles from "./CursorParticles";
 
 export default function Cursor() {
   const [hovering, setHovering] = useState(false);
@@ -68,6 +69,7 @@ export default function Cursor() {
 
   return (
     <>
+    <CursorParticles />
       {/* Outer Ring */}
       <motion.div
         className="pointer-events-none fixed left-0 top-0 z-[9998] rounded-full border border-cyan-300"
