@@ -5,7 +5,8 @@ import { portfolio } from "../../data/portfolio";
 
 import SectionHeader from "../ui/SectionHeader";
 import ProjectCard from "../ui/ProjectCard";
-import CaseStudyModal from "../ui/case-study/CaseStudyModal";
+import CaseStudyModal from "../ui/case/CaseStudyModal";
+
 
 function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);

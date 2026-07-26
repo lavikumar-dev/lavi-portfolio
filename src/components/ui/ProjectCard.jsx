@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import InteractiveCard from "./effects/InteractiveCard";
+
+
 import {
   FaGithub,
   FaExternalLinkAlt,
@@ -18,15 +21,21 @@ function ProjectCard({ project, index, onCaseStudy }) {
     >
       {/* IMAGE */}
 
-      <motion.div
-        whileHover={{
-          y: -10,
-        }}
-        transition={{
-          duration: 0.35,
-        }}
-        className="group relative"
-      >
+     <TiltCard>
+
+<GlowCard>
+
+<InteractiveCard>
+
+  <motion.div
+    whileHover={{
+      y: -10,
+    }}
+    transition={{
+      duration: 0.35,
+    }}
+    className="group relative"
+  >
         {/* Glow */}
 
         <div className="absolute -inset-6 rounded-[40px] bg-cyan-400/10 opacity-0 blur-[90px] transition duration-500 group-hover:opacity-70" />
@@ -90,6 +99,10 @@ function ProjectCard({ project, index, onCaseStudy }) {
         </div>
 
       </motion.div>
+
+</GlowCard>
+
+</TiltCard>
 
       {/* CONTENT */}
 

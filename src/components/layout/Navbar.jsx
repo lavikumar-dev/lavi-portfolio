@@ -191,7 +191,7 @@ function Navbar() {
           </div>
         </div>
       </motion.nav>
-            <AnimatePresence>
+      <AnimatePresence>
         {menuOpen && (
           <>
             {/* Backdrop */}
@@ -218,9 +218,7 @@ function Navbar() {
               className="fixed right-0 top-0 z-50 flex h-screen w-80 flex-col border-l border-white/10 bg-slate-950/95 p-6 backdrop-blur-2xl md:hidden"
             >
               <div className="mb-10 flex items-center justify-between">
-                <h2 className="text-xl font-bold text-white">
-                  Navigation
-                </h2>
+                <h2 className="text-xl font-bold text-white">Navigation</h2>
 
                 <button
                   onClick={() => setMenuOpen(false)}
