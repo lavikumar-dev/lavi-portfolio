@@ -1,5 +1,3 @@
-// Motion Design Tokens
-
 export const easing = [0.22, 1, 0.36, 1];
 
 export const viewport = {
@@ -14,21 +12,20 @@ export const durations = {
 };
 
 export const distances = {
-  sm: 12,
-  md: 20,
-  lg: 32,
+  sm: 16,
+  md: 28,
+  lg: 48,
 };
 
-export const staggerItem = {
+export const entranceVariant = {
   hidden: {
     opacity: 0,
-    y: distances.md,
-    scale: 0.985,
+    y: 18,
   },
+
   show: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
       duration: durations.normal,
       ease: easing,

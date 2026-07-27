@@ -1,37 +1,47 @@
 import { motion } from "framer-motion";
 import {
+  distances,
+  durations,
   easing,
   viewport,
-  durations,
-  distances,
-} from "./motion";
+} from "./tokens";
 
 const directionMap = {
-  up: (d) => ({ x: 0, y: d }),
-  down: (d) => ({ x: 0, y: -d }),
-  left: (d) => ({ x: d, y: 0 }),
-  right: (d) => ({ x: -d, y: 0 }),
-  none: () => ({ x: 0, y: 0 }),
+  up: { x: 0, y: distances.md },
+  down: { x: 0, y: -distances.md },
+  left: { x: -distances.md, y: 0 },
+  right: { x: distances.md, y: 0 },
 };
 
-export default function Reveal({
+function Reveal({
   children,
-  className = "",
   direction = "up",
   distance = "md",
-  delay = 0,
   duration = "normal",
-  scale = true,
+  delay = 0,
+  scale = 1,
+  className = "",
+  once = true,
+  amount = viewport.amount,
+  ...props
 }) {
-  const offset = directionMap[direction](distances[distance]);
+  const offset = directionMap[direction] || directionMap.up;
+
+  const multiplier =
+    distance === "sm"
+      ? distances.sm / distances.md
+      : distance === "lg"
+      ? distances.lg / distances.md
+      : 1;
 
   return (
     <motion.div
       className={className}
       initial={{
         opacity: 0,
-        ...offset,
-        scale: scale ? 0.985 : 1,
+        x: offset.x * multiplier,
+        y: offset.y * multiplier,
+        scale: scale === 1 ? 0.985 : scale,
       }}
       whileInView={{
         opacity: 1,
@@ -39,14 +49,20 @@ export default function Reveal({
         y: 0,
         scale: 1,
       }}
-      viewport={viewport}
       transition={{
+        duration: durations[duration] ?? durations.normal,
         delay,
-        duration: durations[duration],
         ease: easing,
       }}
+      viewport={{
+        once,
+        amount,
+      }}
+      {...props}
     >
       {children}
     </motion.div>
   );
 }
+
+export default Reveal;

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { viewport } from "./motion";
+import { viewport } from "./tokens";
 
 export default function Stagger({
   children,
