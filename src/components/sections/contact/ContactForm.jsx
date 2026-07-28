@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
+
 import { sendContactEmail } from "../../../services/emailService";
 
 import {
@@ -36,12 +38,20 @@ function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const loadingToast = toast.loading("Sending your message...");
+
     try {
       setLoading(true);
 
-      await sendContactEmail(formData);
+      const response = await sendContactEmail(formData);
+      console.log("EmailJS Success:", response);
 
-      alert("✅ Your message has been sent successfully!");
+      toast.success(
+        "Message sent successfully! I'll get back to you soon.",
+        {
+          id: loadingToast,
+        }
+      );
 
       setFormData({
         name: "",
@@ -49,14 +59,21 @@ function ContactForm() {
         subject: "",
         message: "",
       });
-    } catch (error) {
-      console.error("========== EMAILJS ERROR ==========");
-      console.error(error);
 
-      alert(
-        `Status: ${error?.status || "Unknown"}\n\nText: ${
-          error?.text || error?.message || "Unknown Error"
-        }`
+      // Ensures the form is completely reset
+      e.target.reset();
+    } catch (error) {
+      // Detailed error for debugging
+      console.error("EmailJS Error:", error);
+
+      // User-friendly error notification
+      toast.error(
+        error?.text ||
+          error?.message ||
+          "Failed to send your message. Please try again.",
+        {
+          id: loadingToast,
+        }
       );
     } finally {
       setLoading(false);
@@ -65,9 +82,7 @@ function ContactForm() {
 
   return (
     <Reveal>
-      <motion.div
-        className="relative overflow-hidden rounded-3xl border border-cyan-400/20 bg-slate-900/60 p-8 backdrop-blur-xl"
-      >
+      <motion.div className="relative overflow-hidden rounded-3xl border border-cyan-400/20 bg-slate-900/60 p-8 backdrop-blur-xl">
         {/* Decorative Glow */}
         <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-cyan-500/10 blur-3xl" />
         <div className="absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
@@ -87,7 +102,7 @@ function ContactForm() {
             </div>
           </EntranceItem>
 
-          {/* Form */}
+          {/* Contact Form */}
           <EntranceItem>
             <form onSubmit={handleSubmit} className="space-y-5">
               <Input
@@ -138,7 +153,9 @@ function ContactForm() {
           <EntranceItem>
             <p className="text-center text-sm text-slate-500">
               I'll usually respond within{" "}
-              <span className="text-cyan-400">24 hours</span>.
+              <span className="font-medium text-cyan-400">
+                24 hours
+              </span>.
             </p>
           </EntranceItem>
         </Sequence>

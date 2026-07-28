@@ -12,32 +12,51 @@ function ProjectContent({
 }) {
   return (
     <motion.div
-  initial={{
-    opacity: 0,
-    x: isReversed ? -60 : 60,
-  }}
-  whileInView={{
-    opacity: 1,
-    x: 0,
-  }}
-  viewport={{
-    once: true,
-    amount: 0.35,
-  }}
-  transition={{
-    duration: 0.8,
-    delay: 0.15,
-    ease: [0.22, 1, 0.36, 1],
-  }}
-  className="relative"
->
-
+      initial={{
+        opacity: 0,
+        x: isReversed ? -35 : 35,
+        y: 10,
+      }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.15,
+      }}
+      transition={{
+        duration: 0.55,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className="
+        relative
+        text-center
+        lg:text-left
+      "
+    >
       {/* ========================= */}
       {/* Header */}
       {/* ========================= */}
 
-      <div className="flex flex-wrap items-center gap-4">
-
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.35,
+          delay: 0.05,
+        }}
+        className="
+          flex
+          flex-wrap
+          items-center
+          justify-center
+          gap-3
+          lg:justify-start
+        "
+      >
         <span className="text-sm font-semibold uppercase tracking-[0.35em] text-cyan-400">
           {project.category}
         </span>
@@ -55,8 +74,7 @@ function ProjectContent({
         >
           {project.status}
         </span>
-
-      </div>
+      </motion.div>
 
       {/* ========================= */}
       {/* Title */}
@@ -65,17 +83,29 @@ function ProjectContent({
       <motion.h3
         initial={{
           opacity: 0,
-          y: 20,
+          y: 12,
         }}
         whileInView={{
           opacity: 1,
           y: 0,
         }}
-        transition={{
-          duration: 0.6,
-          delay: 0.1,
+        viewport={{
+          once: true,
         }}
-        className="mt-6 text-6xl font-black leading-[1.05] text-white"
+        transition={{
+          duration: 0.45,
+          delay: 0.08,
+        }}
+        className="
+          mt-6
+          text-3xl
+          sm:text-4xl
+          md:text-5xl
+          xl:text-6xl
+          font-black
+          leading-tight
+          text-white
+        "
       >
         {project.title}
       </motion.h3>
@@ -87,17 +117,32 @@ function ProjectContent({
       <motion.p
         initial={{
           opacity: 0,
-          y: 20,
+          y: 12,
         }}
         whileInView={{
           opacity: 1,
           y: 0,
         }}
-        transition={{
-          duration: 0.6,
-          delay: 0.18,
+        viewport={{
+          once: true,
         }}
-        className="mt-5 max-w-2xl text-2xl font-medium leading-10 text-slate-300"
+        transition={{
+          duration: 0.45,
+          delay: 0.12,
+        }}
+        className="
+          mt-5
+          mx-auto
+          max-w-2xl
+          text-lg
+          sm:text-xl
+          lg:mx-0
+          lg:text-2xl
+          font-medium
+          leading-8
+          lg:leading-10
+          text-slate-300
+        "
       >
         {project.subtitle}
       </motion.p>
@@ -109,17 +154,31 @@ function ProjectContent({
       <motion.p
         initial={{
           opacity: 0,
-          y: 20,
+          y: 12,
         }}
         whileInView={{
           opacity: 1,
           y: 0,
         }}
-        transition={{
-          duration: 0.6,
-          delay: 0.26,
+        viewport={{
+          once: true,
         }}
-        className="mt-10 max-w-2xl text-lg leading-9 text-slate-400"
+        transition={{
+          duration: 0.45,
+          delay: 0.16,
+        }}
+        className="
+          mt-8
+          lg:mt-10
+          mx-auto
+          max-w-2xl
+          text-base
+          sm:text-lg
+          leading-8
+          lg:leading-9
+          text-slate-400
+          lg:mx-0
+        "
       >
         {project.description}
       </motion.p>
@@ -127,28 +186,58 @@ function ProjectContent({
       {/* Tech Stack */}
       {/* ========================= */}
 
-      <TechStackPills tech={project.tech} />
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.4,
+          delay: 0.18,
+        }}
+      >
+        <TechStackPills tech={project.tech} />
+      </motion.div>
 
       {/* ========================= */}
       {/* Action Buttons */}
       {/* ========================= */}
 
-      <ProjectButtons
-        github={project.github}
-        demo={project.demo}
-        project={project}
-        hovered={hovered}
-        onCaseStudy={onCaseStudy}
-      />
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.4,
+          delay: 0.22,
+        }}
+      >
+        <ProjectButtons
+          github={project.github}
+          demo={project.demo}
+          project={project}
+          hovered={hovered}
+          onCaseStudy={onCaseStudy}
+        />
+      </motion.div>
 
       {/* ========================= */}
       {/* Footer */}
       {/* ========================= */}
 
-      <ProjectFooter
-        duration={project.duration}
-        hovered={hovered}
-      />
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.4,
+          delay: 0.26,
+        }}
+      >
+        <ProjectFooter
+          duration={project.duration}
+          hovered={hovered}
+        />
+      </motion.div>
     </motion.div>
   );
 }

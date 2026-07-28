@@ -11,16 +11,62 @@ export default function ModalHeader({ project, onClose }) {
     <motion.header
       initial={{ y: -25, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.35 }}
-      className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/75 backdrop-blur-2xl"
+      transition={{
+        duration: 0.35,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="
+        sticky
+        top-0
+        z-50
+        border-b
+        border-white/10
+        bg-slate-950/80
+        backdrop-blur-2xl
+      "
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <div className="min-w-0">
-          <h2 className="truncate text-xl font-bold text-white">
+      <div
+        className="
+          mx-auto
+          flex
+          max-w-7xl
+          flex-col
+          gap-5
+          px-4
+          py-4
+          sm:px-6
+          lg:flex-row
+          lg:items-start
+          lg:justify-between
+        "
+      >
+        {/* ========================= */}
+        {/* Left Side */}
+        {/* ========================= */}
+
+        <div className="min-w-0 flex-1">
+          <h2
+            className="
+              break-words
+              text-xl
+              font-bold
+              text-white
+              sm:text-2xl
+            "
+          >
             {project.title}
           </h2>
 
-          <div className="mt-2 flex flex-wrap items-center gap-3">
+          <div
+            className="
+              mt-3
+              flex
+              flex-wrap
+              items-center
+              gap-2
+              sm:gap-3
+            "
+          >
             {project.category && (
               <span className="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-300">
                 {project.category}
@@ -42,40 +88,104 @@ export default function ModalHeader({ project, onClose }) {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        {/* ========================= */}
+        {/* Right Side */}
+        {/* ========================= */}
+
+        <div
+          className="
+            flex
+            flex-wrap
+            items-center
+            justify-start
+            gap-3
+            lg:flex-nowrap
+            lg:justify-end
+          "
+        >
           {project.github && (
             <motion.a
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white transition-all hover:bg-white/10"
+              className="
+                flex
+                items-center
+                gap-2
+                rounded-xl
+                border
+                border-white/10
+                bg-white/5
+                px-4
+                py-2
+                text-sm
+                text-white
+                transition-all
+                hover:bg-white/10
+              "
             >
               <Code2 size={16} />
-              GitHub
+              <span className="hidden sm:inline">
+                GitHub
+              </span>
             </motion.a>
           )}
 
           {project.demo && (
             <motion.a
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-xl bg-cyan-500 px-4 py-2 text-sm font-medium text-slate-950 transition-all hover:bg-cyan-400"
+              className="
+                flex
+                items-center
+                gap-2
+                rounded-xl
+                bg-cyan-500
+                px-4
+                py-2
+                text-sm
+                font-medium
+                text-slate-950
+                transition-all
+                hover:bg-cyan-400
+              "
             >
               <ExternalLink size={16} />
-              Live Demo
+              <span className="hidden sm:inline">
+                Live Demo
+              </span>
             </motion.a>
           )}
 
           <motion.button
-            whileHover={{ rotate: 90, scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
+            whileHover={{
+              rotate: 90,
+              scale: 1.08,
+            }}
+            whileTap={{
+              scale: 0.92,
+            }}
             onClick={onClose}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all hover:bg-red-500/20"
+            className="
+              flex
+              h-11
+              w-11
+              shrink-0
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-white/10
+              bg-white/5
+              text-white
+              transition-all
+              hover:bg-red-500/20
+            "
           >
             <X size={18} />
           </motion.button>

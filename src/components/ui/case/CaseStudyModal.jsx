@@ -23,7 +23,6 @@ export default function CaseStudyModal({
   useEffect(() => {
     if (!project) return;
 
-    // Lock background scrolling
     document.body.style.overflow = "hidden";
 
     const handleKeyDown = (event) => {
@@ -57,12 +56,18 @@ export default function CaseStudyModal({
     <>
       <AnimatePresence>
         <motion.div
-          className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-xl"
+          className="
+            fixed
+            inset-0
+            z-[100]
+            bg-black/80
+            backdrop-blur-xl
+          "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          {/* Background Click */}
+          {/* Background */}
           <div
             className="absolute inset-0"
             onClick={onClose}
@@ -73,7 +78,7 @@ export default function CaseStudyModal({
             ref={containerRef}
             initial={{
               opacity: 0,
-              y: 50,
+              y: 30,
               scale: 0.98,
             }}
             animate={{
@@ -83,13 +88,26 @@ export default function CaseStudyModal({
             }}
             exit={{
               opacity: 0,
-              y: 50,
+              y: 30,
               scale: 0.98,
             }}
             transition={{
               duration: 0.35,
+              ease: [0.22, 1, 0.36, 1],
             }}
-            className="absolute inset-4 overflow-y-auto rounded-3xl border border-white/10 bg-slate-950 shadow-2xl lg:inset-8"
+            className="
+              absolute
+              inset-2
+              sm:inset-4
+              lg:inset-8
+              overflow-y-auto
+              rounded-2xl
+              sm:rounded-3xl
+              border
+              border-white/10
+              bg-slate-950
+              shadow-[0_40px_120px_rgba(0,0,0,.55)]
+            "
             onClick={(e) => e.stopPropagation()}
           >
             <ModalHeader

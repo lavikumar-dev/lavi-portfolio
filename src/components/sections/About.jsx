@@ -32,7 +32,7 @@ const timeline = [
     year: "Present",
     title: "AI & Software Development",
     description:
-      "Currently learning Python, Java, Generative AI, and building projects while actively looking for internship opportunities.",
+      "Currently learning Python, Java, Generative AI, and building projects while continuously improving my skills through real-world projects.",
     icon: <FaRobot />,
   },
 ];
@@ -50,63 +50,113 @@ function About() {
       </div>
 
       <div className="relative mx-auto max-w-6xl px-6">
-
         <motion.p
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center font-semibold uppercase tracking-[0.35em] text-cyan-400"
         >
-          About Me
+          Beyond The Code
         </motion.p>
 
         <motion.h2
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: .1 }}
+          transition={{ delay: 0.1 }}
           className="mt-5 text-center text-5xl font-black text-white"
         >
-          My Journey
+          The Mind Behind The Build
         </motion.h2>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: .2 }}
-          className="mx-auto mt-6 max-w-3xl text-center text-lg leading-8 text-slate-400"
+          transition={{ delay: 0.2 }}
+          className="mx-auto mt-10 max-w-4xl rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl"
         >
-          Every project has been another step toward becoming a software
-          engineer capable of building impactful products, immersive games,
-          and AI-powered solutions.
-        </motion.p>
+          <p className="text-lg leading-8 text-slate-300">
+            I believe great software should do more than solve problems—it
+            should leave an impression.
+          </p>
 
-        <div className="relative mt-24">
+          <p className="mt-6 leading-8 text-slate-400">
+            Every project I build begins with a simple question:
+            <span className="font-semibold text-white">
+              {" "}
+              "How can this feel different?"
+            </span>{" "}
+            Not different because it's overloaded with effects, but because
+            every interaction has purpose. I enjoy crafting interfaces that
+            feel smooth, responsive, and alive, where thoughtful design meets
+            clean engineering.
+          </p>
 
-          {/* Center Line */}
+          <p className="mt-6 leading-8 text-slate-400">
+            As a Computer Science student, I'm constantly exploring web
+            development, software engineering, game development, and modern
+            technologies that challenge me to think beyond conventional
+            solutions. Every project is another opportunity to refine my craft
+            and build experiences that people genuinely enjoy using.
+          </p>
+
+          <motion.blockquote
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.35 }}
+            className="mt-10 rounded-2xl border-l-4 border-cyan-400 bg-cyan-500/5 p-6"
+          >
+            <p className="text-xl font-semibold italic leading-9 text-white">
+              "I don't build software just to make it functional.
+              <br />
+              I build software to make it unforgettable."
+            </p>
+          </motion.blockquote>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.25 }}
+          className="mt-24 text-center"
+        >
+          <h3 className="text-3xl font-bold text-white">
+            The Journey So Far
+          </h3>
+
+          <p className="mx-auto mt-4 max-w-2xl leading-8 text-slate-400">
+            Every milestone has shaped the way I approach design, development,
+            and problem solving. This journey is only getting started.
+          </p>
+        </motion.div>
+
+        <div className="relative mt-20">
           <div className="absolute left-1/2 hidden h-full w-[3px] -translate-x-1/2 rounded-full bg-gradient-to-b from-cyan-400 via-blue-500 to-cyan-400 lg:block" />
-                    <div className="space-y-20">
 
+          <div className="space-y-20">
             {timeline.map((item, index) => (
               <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                className={`relative flex items-center ${
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.15,
+                }}
+                className={`relative flex items-center justify-center ${
                   index % 2 === 0
                     ? "lg:justify-start"
                     : "lg:justify-end"
-                } justify-center`}
+                }`}
               >
-                {/* Timeline Dot */}
                 <div className="absolute left-1/2 z-20 hidden h-16 w-16 -translate-x-1/2 items-center justify-center rounded-full border border-cyan-400/30 bg-slate-900 text-2xl text-cyan-400 shadow-[0_0_40px_rgba(34,211,238,0.35)] lg:flex">
                   {item.icon}
                 </div>
 
-                {/* Card */}
                 <motion.div
                   whileHover={{
                     y: -8,
@@ -133,9 +183,8 @@ function About() {
                 </motion.div>
               </motion.div>
             ))}
-
           </div>
-                  </div>
+        </div>
       </div>
     </section>
   );

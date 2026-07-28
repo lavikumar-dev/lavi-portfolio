@@ -5,11 +5,7 @@ import ProjectContent from "./project/ProjectContent";
 
 import useProjectTilt from "../../hooks/useProjectTilt";
 
-function ProjectCard({
-  project,
-  index,
-  onCaseStudy,
-}) {
+function ProjectCard({ project, index, onCaseStudy }) {
   const tilt = useProjectTilt();
 
   const isReversed = index % 2 !== 0;
@@ -18,7 +14,7 @@ function ProjectCard({
     <motion.article
       initial={{
         opacity: 0,
-        y: 60,
+        y: 40,
       }}
       whileInView={{
         opacity: 1,
@@ -29,14 +25,14 @@ function ProjectCard({
         amount: 0.2,
       }}
       transition={{
-        duration: 0.8,
-        delay: index * 0.08,
+        duration: 0.6,
+        delay: index * 0.05,
         ease: [0.22, 1, 0.36, 1],
       }}
       className={`
         grid
         items-center
-        gap-20
+        gap-14 lg:gap-20
         lg:grid-cols-[1.15fr_0.85fr]
         ${
           isReversed
@@ -45,11 +41,7 @@ function ProjectCard({
         }
       `}
     >
-      <ProjectImage
-        project={project}
-        tilt={tilt}
-        isReversed={isReversed}
-      />
+      <ProjectImage project={project} tilt={tilt} isReversed={isReversed} />
 
       <ProjectContent
         project={project}

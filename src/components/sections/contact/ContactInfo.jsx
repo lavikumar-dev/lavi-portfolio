@@ -14,7 +14,7 @@ import {
 function ContactInfo() {
   return (
     <Reveal>
-      <Sequence className="space-y-8">
+      <Sequence className="space-y-10">
         {/* Section Heading */}
         <EntranceItem>
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
@@ -34,16 +34,19 @@ function ContactInfo() {
 
         {/* Availability Card */}
         <EntranceItem>
-          <div className="rounded-2xl border border-cyan-400/20 bg-slate-900/60 p-6 backdrop-blur-xl">
-            <div className="flex items-center gap-3">
-              <span className="h-3 w-3 rounded-full bg-emerald-400 animate-pulse"></span>
+          <div className="rounded-2xl border border-cyan-400/20 bg-slate-900/60 p-6 backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/40 hover:bg-slate-900/80">
+            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-emerald-400">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400"></span>
+              Available Now
+            </span>
 
+            <div className="flex items-start gap-3">
               <div>
                 <h3 className="font-semibold text-white">
                   Available for Opportunities
                 </h3>
 
-                <p className="mt-1 text-sm text-slate-400">
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">
                   Currently open to internships, freelance projects, and
                   collaborative student work.
                 </p>
@@ -56,32 +59,40 @@ function ContactInfo() {
         <EntranceItem>
           <div className="space-y-6">
             {/* Email */}
-            <div className="flex items-center gap-4">
-              <div className="rounded-xl bg-cyan-400/10 p-4 text-cyan-400">
+            <a
+              href="mailto:lavikum789@gmail.com"
+              className="group flex items-center gap-4 rounded-2xl transition-all duration-300 hover:translate-x-1"
+            >
+              <div className="rounded-xl bg-cyan-400/10 p-4 text-cyan-400 transition-all duration-300 group-hover:bg-cyan-400/20 group-hover:shadow-lg group-hover:shadow-cyan-500/10">
                 <FaEnvelope size={20} />
               </div>
 
               <div>
                 <p className="text-sm text-slate-500">Email</p>
-                <p className="font-medium text-white">
+                <p className="font-medium text-white transition-colors duration-300 group-hover:text-cyan-400">
                   lavikum789@gmail.com
                 </p>
               </div>
-            </div>
+            </a>
 
             {/* Location */}
-            <div className="flex items-center gap-4">
-              <div className="rounded-xl bg-cyan-400/10 p-4 text-cyan-400">
+            <a
+              href="https://maps.google.com/?q=Chandigarh,India"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 rounded-2xl transition-all duration-300 hover:translate-x-1"
+            >
+              <div className="rounded-xl bg-cyan-400/10 p-4 text-cyan-400 transition-all duration-300 group-hover:bg-cyan-400/20 group-hover:shadow-lg group-hover:shadow-cyan-500/10">
                 <FaMapMarkerAlt size={20} />
               </div>
 
               <div>
                 <p className="text-sm text-slate-500">Location</p>
-                <p className="font-medium text-white">
+                <p className="font-medium text-white transition-colors duration-300 group-hover:text-cyan-400">
                   Chandigarh, India
                 </p>
               </div>
-            </div>
+            </a>
           </div>
         </EntranceItem>
 
@@ -92,16 +103,18 @@ function ContactInfo() {
               href="https://github.com/lavikumar-dev"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-slate-300 transition-all duration-300 hover:border-cyan-400 hover:text-cyan-400"
+              aria-label="GitHub"
+              className="rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400 hover:bg-slate-800 hover:text-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20"
             >
               <FaGithub size={22} />
             </a>
 
             <a
-              href="https://linkedin.com/in/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-slate-300 transition-all duration-300 hover:border-cyan-400 hover:text-cyan-400"
+              href="#"
+              onClick={(e) => e.preventDefault()}
+              aria-label="LinkedIn"
+              className="cursor-not-allowed rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-slate-500 transition-all duration-300 hover:border-cyan-400 hover:bg-slate-800 hover:text-cyan-400"
+              title="LinkedIn profile will be available soon"
             >
               <FaLinkedin size={22} />
             </a>

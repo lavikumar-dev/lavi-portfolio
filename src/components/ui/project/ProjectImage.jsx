@@ -1,27 +1,17 @@
 import { motion } from "framer-motion";
 import FeaturedBadge from "./FeaturedBadge";
 
-function ProjectImage({
-  project,
-  tilt,
-  isReversed,
-}) {
+function ProjectImage({ project, tilt, isReversed }) {
   const {
     cardRef,
-
     hovered,
-
     rotateX,
     rotateY,
-
     imageX,
     imageY,
-
     glowX,
     glowY,
-
     reflectionX,
-
     handleMove,
     handleEnter,
     handleLeave,
@@ -29,38 +19,40 @@ function ProjectImage({
 
   return (
     <motion.div
-  initial={{
-    opacity: 0,
-    x: isReversed ? 60 : -60,
-  }}
-  whileInView={{
-    opacity: 1,
-    x: 0,
-  }}
-  viewport={{
-    once: true,
-    amount: 0.35,
-  }}
-  transition={{
-    duration: 0.8,
-    ease: [0.22, 1, 0.36, 1],
-  }}
-  ref={cardRef}
-  onMouseMove={handleMove}
-  onMouseEnter={handleEnter}
-  onMouseLeave={handleLeave}
-  style={{
-    rotateX,
-    rotateY,
-    transformPerspective: 1800,
-    transformStyle: "preserve-3d",
-  }}
-  className="group relative"
->
-      {/* ========================= */}
+      initial={{
+        opacity: 0,
+        x: isReversed ? 35 : -35,
+        scale: 0.97,
+        filter: "blur(4px)",
+      }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+        scale: 1,
+        filter: "blur(0px)",
+      }}
+      viewport={{
+        once: true,
+        amount: 0.15,
+      }}
+      transition={{
+        duration: 0.55,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      ref={cardRef}
+      onMouseMove={handleMove}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformPerspective: 1800,
+        transformStyle: "preserve-3d",
+        willChange: "transform",
+      }}
+      className="group relative"
+    >
       {/* Ambient Glow */}
-      {/* ========================= */}
-
       <motion.div
         style={{
           left: glowX,
@@ -76,24 +68,30 @@ function ProjectImage({
         className="
           pointer-events-none
           absolute
-          h-[420px]
-          w-[420px]
+          left-1/2
+          top-1/2
+          h-[280px]
+          w-[280px]
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
           bg-cyan-400/20
-          blur-[120px]
+          blur-[90px]
+          sm:h-[340px]
+          sm:w-[340px]
+          lg:h-[420px]
+          lg:w-[420px]
+          lg:blur-[120px]
         "
       />
 
-      {/* ========================= */}
       {/* Ambient Background */}
-      {/* ========================= */}
-
       <div
         className="
           absolute
-          -inset-8
+          -inset-4
+          sm:-inset-6
+          lg:-inset-8
           rounded-[42px]
           bg-gradient-to-br
           from-cyan-400/5
@@ -103,40 +101,43 @@ function ProjectImage({
         "
       />
 
-      {/* ========================= */}
-      {/* Main Glass Card */}
-      {/* ========================= */}
-
+      {/* Glass Card */}
       <div
         className="
           relative
           overflow-hidden
-          rounded-[36px]
+          rounded-[28px]
+          sm:rounded-[32px]
+          lg:rounded-[36px]
           border
           border-white/10
           bg-slate-900/70
-          shadow-[0_40px_120px_rgba(0,0,0,.55)]
+          shadow-[0_30px_80px_rgba(0,0,0,.45)]
+          lg:shadow-[0_40px_120px_rgba(0,0,0,.55)]
           backdrop-blur-2xl
         "
       >
-        {/* Animated Border */}
-
+        {/* Border */}
         <motion.div
           animate={{
             opacity: hovered ? 1 : 0.4,
+          }}
+          transition={{
+            duration: 0.25,
           }}
           className="
             pointer-events-none
             absolute
             inset-0
-            rounded-[36px]
+            rounded-[28px]
+            sm:rounded-[32px]
+            lg:rounded-[36px]
             border
             border-cyan-400/30
           "
         />
 
         {/* Reflection */}
-
         <motion.div
           style={{
             x: reflectionX,
@@ -155,15 +156,10 @@ function ProjectImage({
           "
         />
 
-        {/* Featured Badge */}
-
         <FeaturedBadge show={project.featured} />
 
-        {/* ========================= */}
-        {/* Image Section */}
-        {/* ========================= */}
-
-        <div className="relative aspect-video overflow-hidden bg-slate-950">
+        {/* Image */}
+        <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
           <motion.img
             src={project.image}
             alt={project.title}
@@ -175,14 +171,17 @@ function ProjectImage({
             transition={{
               duration: 0.5,
             }}
-            className="h-full w-full object-contain"
+            className="
+              h-full
+              w-full
+              object-cover
+              object-center
+              transition-transform
+              duration-500
+            "
           />
 
-          {/* Image Overlay */}
-
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/10 to-transparent" />
-
-          {/* Noise Texture */}
 
           <div
             className="absolute inset-0 opacity-[0.04]"
@@ -194,10 +193,7 @@ function ProjectImage({
           />
         </div>
 
-        {/* ========================= */}
-        {/* Bottom Metadata */}
-        {/* ========================= */}
-
+        {/* Metadata */}
         <div
           className="
             absolute
@@ -210,14 +206,27 @@ function ProjectImage({
             backdrop-blur-3xl
           "
         >
-          <div className="flex flex-wrap items-center gap-y-3 px-7 py-5">
+          <div
+            className="
+              flex
+              flex-wrap
+              items-center
+              gap-x-3
+              gap-y-2
+              px-4
+              py-4
+              sm:px-6
+              sm:py-5
+              lg:px-7
+            "
+          >
             {project.metadata.map((item, index) => (
               <div
                 key={item}
                 className="flex items-center"
               >
                 <span
-                  className={`text-sm ${
+                  className={`text-xs sm:text-sm ${
                     index === 0
                       ? "font-semibold text-cyan-300"
                       : "text-slate-300"
@@ -227,7 +236,7 @@ function ProjectImage({
                 </span>
 
                 {index !== project.metadata.length - 1 && (
-                  <span className="mx-4 h-1.5 w-1.5 rounded-full bg-cyan-400/70" />
+                  <span className="mx-2 sm:mx-4 h-1.5 w-1.5 rounded-full bg-cyan-400/70" />
                 )}
               </div>
             ))}
