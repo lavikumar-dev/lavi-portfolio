@@ -110,14 +110,14 @@ function ContactInfo() {
             </a>
 
             <a
-              href="#"
-              onClick={(e) => e.preventDefault()}
-              aria-label="LinkedIn"
-              className="cursor-not-allowed rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-slate-500 transition-all duration-300 hover:border-cyan-400 hover:bg-slate-800 hover:text-cyan-400"
-              title="LinkedIn profile will be available soon"
-            >
-              <FaLinkedin size={22} />
-            </a>
+  href="https://www.linkedin.com/in/lavi-kumar-793042424/"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="LinkedIn"
+  className="rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400 hover:bg-slate-800 hover:text-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20"
+>
+  <FaLinkedin size={22} />
+</a>
           </div>
         </EntranceItem>
       </Sequence>
