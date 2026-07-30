@@ -36,13 +36,20 @@ export default function ThemeProvider({ children }) {
 
   // Apply & persist theme
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, theme);
+  console.log("Current theme:", theme);
 
-    document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem(STORAGE_KEY, theme);
 
-    applyTheme(theme);
-  }, [theme]);
+  document.documentElement.setAttribute("data-theme", theme);
 
+  applyTheme(theme);
+
+  console.log(
+    "Accent:",
+    getComputedStyle(document.documentElement)
+      .getPropertyValue("--accent")
+  );
+}, [theme]);
   // Normal theme switching
   const changeTheme = (newTheme) => {
     if (newTheme === theme) return;

@@ -11,7 +11,6 @@ import MobileMenu from "./MobileMenu";
 import ResumeButton from "./ResumeButton";
 import ThemeSwitcher from "./ThemeSwitcher";
 
-
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -86,11 +85,24 @@ function Navbar() {
       >
         <div className="mx-auto w-full max-w-7xl px-4 pt-5 sm:px-5 lg:px-6">
           <div
-            className={`flex items-center justify-between rounded-3xl border px-4 py-3 transition-all duration-300 ease-out sm:px-5 sm:py-3.5 lg:px-6 lg:py-4 ${
-              scrolled
-                ? "border-cyan-400/25 bg-slate-900/85 shadow-2xl shadow-cyan-500/10 backdrop-blur-2xl"
-                : "border-white/10 bg-slate-900/55 backdrop-blur-xl"
-            }`}
+            className={`
+              navbar
+              ${scrolled ? "navbar-scrolled" : "navbar-top"}
+              flex
+              items-center
+              justify-between
+              rounded-3xl
+              border
+              px-4
+              py-3
+              transition-all
+              duration-300
+              ease-out
+              sm:px-5
+              sm:py-3.5
+              lg:px-6
+              lg:py-4
+            `}
           >
             <Logo onClick={() => handleNavClick("home")} />
 
@@ -100,15 +112,7 @@ function Navbar() {
               onNavigate={handleNavClick}
             />
 
-            <div
-  className="
-    hidden
-    lg:flex
-    items-center
-    gap-2
-    xl:gap-4
-  "
->
+            <div className="hidden items-center gap-2 lg:flex xl:gap-4">
               <ThemeSwitcher />
 
               <a
@@ -116,7 +120,7 @@ function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="rounded-full p-2 text-xl text-slate-300 transition-all duration-300 hover:bg-cyan-500/10 hover:text-cyan-300"
+                className="nav-icon"
               >
                 <FaGithub />
               </a>
@@ -126,7 +130,7 @@ function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="rounded-full p-2 text-xl text-slate-300 transition-all duration-300 hover:bg-cyan-500/10 hover:text-cyan-300"
+                className="nav-icon"
               >
                 <FaLinkedin />
               </a>
@@ -140,19 +144,7 @@ function Navbar() {
             <button
               onClick={() => setMenuOpen(true)}
               aria-label="Open navigation menu"
-              className="
-  rounded-xl
-  border
-  border-white/10
-  p-2.5
-  text-xl
-  text-white
-  transition-all
-  duration-300
-  hover:border-cyan-400/30
-  hover:text-cyan-300
-  lg:hidden
-"
+              className="mobile-menu-button lg:hidden"
             >
               <FaBars />
             </button>

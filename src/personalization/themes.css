@@ -1,3 +1,7 @@
+/* =========================================================
+   THEME VARIABLES
+========================================================= */
+
 :root {
   /* Backgrounds */
   --bg-primary: #071424;
@@ -6,7 +10,7 @@
   /* Surfaces */
   --surface: rgba(15, 23, 42, 0.72);
 
-  /* Text */
+  /* Typography */
   --text-primary: #ffffff;
   --text-secondary: #cbd5e1;
 
@@ -20,9 +24,336 @@
   /* Effects */
   --glow: rgba(34, 211, 238, 0.35);
 
-  /* Background Grid */
+  /* Background Pattern */
   --grid: rgba(255, 255, 255, 0.06);
 
   /* Transition */
-  --theme-transition: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --theme-transition: 350ms cubic-bezier(.4,0,.2,1);
+}
+
+/* =========================================================
+   DESIGN TOKENS
+========================================================= */
+
+/* Backgrounds */
+
+.bg-primary{
+    background:var(--bg-primary);
+    transition:background var(--theme-transition);
+}
+
+.bg-secondary{
+    background:var(--bg-secondary);
+    transition:background var(--theme-transition);
+}
+
+/* Cards */
+
+.surface{
+    background:var(--surface);
+    transition:background var(--theme-transition);
+}
+
+/* Typography */
+
+.text-primary{
+    color:var(--text-primary);
+    transition:color var(--theme-transition);
+}
+
+.text-secondary{
+    color:var(--text-secondary);
+    transition:color var(--theme-transition);
+}
+
+/* Accent */
+
+.accent{
+    color:var(--accent);
+    transition:color var(--theme-transition);
+}
+
+.border-primary{
+    border-color:var(--border);
+    transition:border-color var(--theme-transition);
+}
+
+/* Glow */
+
+.glow{
+    box-shadow:0 0 40px var(--glow);
+    transition:box-shadow var(--theme-transition);
+}
+/* ==========================================
+   Navigation
+========================================== */
+
+.nav-text {
+  color: var(--text-secondary);
+  transition:
+    color var(--theme-transition),
+    background var(--theme-transition);
+}
+
+.nav-text:hover {
+  color: var(--accent);
+}
+
+.nav-text-active {
+  color: var(--accent);
+  transition: color var(--theme-transition);
+}
+
+.nav-pill {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  transition:
+    background var(--theme-transition),
+    border-color var(--theme-transition);
+}
+
+/* ==========================================
+   Logo
+========================================== */
+
+.logo {
+  color: var(--text-primary);
+  transition: color var(--theme-transition);
+}
+
+.logo:hover {
+  color: var(--accent);
+}
+
+.logo-dot {
+  color: var(--accent);
+  transition: color var(--theme-transition);
+}
+/* ==========================================
+   Buttons
+========================================== */
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg-primary);
+  transition:
+    background var(--theme-transition),
+    color var(--theme-transition),
+    border-color var(--theme-transition),
+    box-shadow var(--theme-transition),
+    transform 220ms ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: var(--accent-hover);
+  box-shadow: 0 10px 30px var(--glow);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+/* ==========================================
+   Navbar
+========================================== */
+
+.navbar {
+  background: var(--surface);
+  border-color: var(--border);
+  transition:
+    background var(--theme-transition),
+    border-color var(--theme-transition),
+    box-shadow var(--theme-transition),
+    backdrop-filter var(--theme-transition);
+}
+
+.navbar-top {
+  backdrop-filter: blur(16px);
+}
+
+.navbar-scrolled {
+  backdrop-filter: blur(24px);
+  box-shadow: 0 18px 45px var(--glow);
+}
+
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  font-size: 1.25rem;
+
+  color: var(--text-secondary);
+
+  transition:
+    color var(--theme-transition),
+    background var(--theme-transition),
+    transform 220ms ease;
+}
+
+.nav-icon:hover {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  transform: translateY(-2px);
+}
+
+.mobile-menu-button {
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: 0.75rem;
+  padding: 0.625rem;
+
+  transition:
+    color var(--theme-transition),
+    border-color var(--theme-transition),
+    background var(--theme-transition),
+    transform 220ms ease;
+}
+
+.mobile-menu-button:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+/* ==========================================
+   Mobile Menu
+========================================== */
+
+.mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 50;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
+  width: 85vw;
+  max-width: 24rem;
+
+  padding: 1.5rem 1.5rem 2.5rem;
+
+  border-left: 1px solid var(--border);
+
+  background: var(--surface);
+
+  backdrop-filter: blur(24px);
+
+  box-shadow: -20px 0 50px rgba(0, 0, 0, 0.35);
+
+  transition:
+    background var(--theme-transition),
+    border-color var(--theme-transition);
+}
+
+.mobile-close-button {
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+
+  color: var(--text-primary);
+
+  transition:
+    color var(--theme-transition),
+    background var(--theme-transition);
+}
+
+.mobile-close-button:hover {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.mobile-nav-link {
+  width: 100%;
+
+  padding: 0.85rem 1rem;
+
+  border-radius: 0.75rem;
+
+  text-align: left;
+
+  color: var(--text-secondary);
+
+  transition:
+    color var(--theme-transition),
+    background var(--theme-transition),
+    border-color var(--theme-transition);
+}
+
+.mobile-nav-link:hover {
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+.mobile-nav-active {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.mobile-footer {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+
+  transition: border-color var(--theme-transition);
+}
+/* ==========================================
+   Theme Switcher
+========================================== */
+
+.theme-switcher-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 9999px;
+  border: 1px solid transparent;
+
+  color: var(--text-secondary);
+  background: transparent;
+
+  transition:
+    color var(--theme-transition),
+    background var(--theme-transition),
+    border-color var(--theme-transition),
+    transform 220ms ease,
+    box-shadow var(--theme-transition);
+}
+
+.theme-switcher-button:hover {
+  color: var(--accent);
+
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+
+  box-shadow: 0 0 18px var(--glow);
+
+  transform: translateY(-2px);
+}
+
+.theme-switcher-button:active {
+  transform: scale(0.95);
+}
+
+.theme-switcher-button:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent),
+    0 0 20px var(--glow);
 }

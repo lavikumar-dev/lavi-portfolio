@@ -2,10 +2,17 @@ function Logo({ onClick }) {
   return (
     <button
       onClick={onClick}
-      className="text-2xl font-bold tracking-wide text-white transition-all duration-300 hover:text-cyan-400"
+      className="
+        logo
+        text-2xl
+        font-bold
+        tracking-wide
+        transition-all
+        duration-300
+      "
     >
       Lavi
-      <span className="text-cyan-400">.</span>
+      <span className="logo-dot">.</span>
     </button>
   );
 }
