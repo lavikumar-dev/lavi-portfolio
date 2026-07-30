@@ -1,0 +1,28 @@
+:root {
+  /* Backgrounds */
+  --bg-primary: #071424;
+  --bg-secondary: #0b1d35;
+
+  /* Surfaces */
+  --surface: rgba(15, 23, 42, 0.72);
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+
+  /* Brand */
+  --accent: #22d3ee;
+  --accent-hover: #06b6d4;
+
+  /* Borders */
+  --border: rgba(34, 211, 238, 0.18);
+
+  /* Effects */
+  --glow: rgba(34, 211, 238, 0.35);
+
+  /* Background Grid */
+  --grid: rgba(255, 255, 255, 0.06);
+
+  /* Transition */
+  --theme-transition: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}

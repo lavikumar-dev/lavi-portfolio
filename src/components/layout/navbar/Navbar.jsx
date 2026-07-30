@@ -11,6 +11,7 @@ import MobileMenu from "./MobileMenu";
 import ResumeButton from "./ResumeButton";
 import ThemeSwitcher from "./ThemeSwitcher";
 
+
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");

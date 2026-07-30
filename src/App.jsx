@@ -7,6 +7,7 @@ import Skills from "./components/sections/Skills";
 import Contact from "./components/sections/contact/Contact";
 import Spotlight from "./components/ui/effects/Spotlight";
 import CursorTrail from "./components/ui/cursor/CursorTrail";
+import ThemeEngineTester from "./personalization/components/ThemeEngineTester";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Skills />
         <Contact />
       </main>
+      <ThemeEngineTester />
     </div>
   );
 }
