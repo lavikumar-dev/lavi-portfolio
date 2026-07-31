@@ -1,88 +1,129 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ThemeContext from "./ThemeContext";
-import themes from "./themes";
+import themes, {
+  defaultTheme,
+  getTheme,
+  themeOrder,
+} from "./themes";
 
 const STORAGE_KEY = "portfolio-theme";
 
-/**
- * Applies a theme by updating CSS variables.
- */
+const toCssVariable = (key) =>
+  `--${key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`)}`;
+
 const applyTheme = (themeName) => {
-  const selectedTheme = themes[themeName];
-
-  if (!selectedTheme) return;
-
+  const design = getTheme(themeName);
   const root = document.documentElement;
+  const { colors, tokens } = design;
 
-  Object.entries(selectedTheme.colors).forEach(([key, value]) => {
-    const cssVariable =
-      "--" + key.replace(/[A-Z]/g, (match) => "-" + match.toLowerCase());
-
-    root.style.setProperty(cssVariable, value);
+  Object.entries(colors).forEach(([key, value]) => {
+    root.style.setProperty(toCssVariable(key), value);
   });
+
+  root.style.setProperty("--font-body", tokens.typography.bodyFont);
+  root.style.setProperty("--font-display", tokens.typography.displayFont);
+  root.style.setProperty("--font-body-weight", tokens.typography.bodyWeight);
+  root.style.setProperty("--font-display-weight", tokens.typography.displayWeight);
+  root.style.setProperty("--space-section", tokens.spacing.section);
+  root.style.setProperty("--space-section-compact", tokens.spacing.sectionCompact);
+  root.style.setProperty("--content-width", tokens.spacing.contentWidth);
+  root.style.setProperty("--surface-card", tokens.surface.card);
+  root.style.setProperty("--surface-elevated", tokens.surface.elevated);
+  root.style.setProperty("--radius-card", tokens.surface.borderRadius);
+  root.style.setProperty("--shadow-card", tokens.surface.shadow);
+  root.style.setProperty("--radius-button", tokens.button.radius);
+  root.style.setProperty("--button-text-transform", tokens.button.textTransform);
+  root.style.setProperty("--shadow-button", tokens.button.shadow);
+  root.style.setProperty("--atmosphere-primary", tokens.atmosphere.primaryGlow);
+  root.style.setProperty("--atmosphere-secondary", tokens.atmosphere.secondaryGlow);
+  root.style.setProperty("--particle-color", tokens.atmosphere.particleColor);
+  root.style.setProperty("--motion-easing", tokens.motion.easing);
+  root.style.setProperty("--motion-duration", tokens.motion.duration);
+  root.style.setProperty("--motion-hover-lift", tokens.motion.hoverLift);
+  root.style.setProperty("--motion-ambient-speed", tokens.motion.ambientSpeed);
+
+  root.dataset.theme = design.id;
+  root.dataset.atmosphere = tokens.atmosphere.treatment;
+  root.dataset.decoration = tokens.atmosphere.decoration;
+};
+
+const getStoredTheme = () => {
+  const storedTheme = localStorage.getItem(STORAGE_KEY);
+
+  return themes[storedTheme] ? storedTheme : defaultTheme;
 };
 
 export default function ThemeProvider({ children }) {
-  // Current active theme
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem(STORAGE_KEY) || "ocean";
-  });
-
-  // Previous theme (used for transitions)
+  const [theme, setTheme] = useState(getStoredTheme);
   const [previousTheme, setPreviousTheme] = useState(null);
-
-  // Used later for cinematic transitions
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const transitionTimeout = useRef(null);
 
-  // Apply & persist theme
   useEffect(() => {
-  console.log("Current theme:", theme);
+    localStorage.setItem(STORAGE_KEY, theme);
+    applyTheme(theme);
+  }, [theme]);
 
-  localStorage.setItem(STORAGE_KEY, theme);
-
-  document.documentElement.setAttribute("data-theme", theme);
-
-  applyTheme(theme);
-
-  console.log(
-    "Accent:",
-    getComputedStyle(document.documentElement)
-      .getPropertyValue("--accent")
+  useEffect(
+    () => () => {
+      window.clearTimeout(transitionTimeout.current);
+    },
+    [],
   );
-}, [theme]);
-  // Normal theme switching
-  const changeTheme = (newTheme) => {
-    if (newTheme === theme) return;
 
-    setPreviousTheme(theme);
-    setTheme(newTheme);
-  };
+  const changeTheme = useCallback(
+    (nextTheme) => {
+      if (!themes[nextTheme] || nextTheme === theme) return;
 
-  // Placeholder for future Crimson Sword cinematic
-  const enterCrimsonSword = () => {
-    changeTheme("crimson");
-  };
+      setPreviousTheme(theme);
+      setIsTransitioning(true);
+      setTheme(nextTheme);
 
-  // Placeholder for exiting Crimson Sword
-  const exitCrimsonSword = (targetTheme = "ocean") => {
-    changeTheme(targetTheme);
-  };
+      window.clearTimeout(transitionTimeout.current);
+      transitionTimeout.current = window.setTimeout(() => {
+        setIsTransitioning(false);
+      }, 520);
+    },
+    [theme],
+  );
 
-  const value = useMemo(
-    () => ({
+  const enterCrimsonSword = useCallback(
+    () => changeTheme("crimson"),
+    [changeTheme],
+  );
+
+  const exitCrimsonSword = useCallback(
+    (targetTheme = defaultTheme) => changeTheme(targetTheme),
+    [changeTheme],
+  );
+
+  const value = useMemo(() => {
+    const design = getTheme(theme);
+
+    return {
       theme,
       previousTheme,
       isTransitioning,
-
       setTheme: changeTheme,
-
       enterCrimsonSword,
       exitCrimsonSword,
-
       setIsTransitioning,
-    }),
-    [theme, previousTheme, isTransitioning]
-  );
+      design,
+      colors: design.colors,
+      tokens: design.tokens,
+      hero: design.copy.hero,
+      about: design.copy.about,
+      contact: design.copy.contact,
+      themeOptions: themeOrder.map((id) => themes[id]),
+    };
+  }, [
+    changeTheme,
+    enterCrimsonSword,
+    exitCrimsonSword,
+    isTransitioning,
+    previousTheme,
+    theme,
+  ]);
 
   return (
     <ThemeContext.Provider value={value}>

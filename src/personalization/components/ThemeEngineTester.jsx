@@ -55,7 +55,9 @@ export default function ThemeEngineTester() {
 
         <button onClick={() => setTheme("emerald")}>Emerald</button>
 
-        <button onClick={() => setTheme("light")}>Light</button>
+        <button onClick={() => setTheme("professional")}>
+          Professional
+        </button>
 
         <button onClick={enterCrimsonSword}>
           Enter Crimson Sword
