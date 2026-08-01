@@ -1,3 +1,5 @@
+import { copy } from "./engine/copy";
+
 const themes = {
   ocean: {
     id: "ocean",
@@ -20,6 +22,8 @@ const themes = {
 
       grid: "rgba(255,255,255,.06)",
     },
+
+    copy: copy.ocean,
   },
 
   midnight: {
@@ -43,6 +47,8 @@ const themes = {
 
       grid: "rgba(255,255,255,.05)",
     },
+
+    copy: copy.midnight,
   },
 
   emerald: {
@@ -66,6 +72,8 @@ const themes = {
 
       grid: "rgba(255,255,255,.05)",
     },
+
+    copy: copy.emerald,
   },
 
   light: {
@@ -89,6 +97,8 @@ const themes = {
 
       grid: "rgba(15,23,42,.05)",
     },
+
+    copy: copy.light,
   },
 
   crimson: {
@@ -112,6 +122,8 @@ const themes = {
 
       grid: "rgba(255,255,255,.04)",
     },
+
+    copy: copy.crimson,
   },
 };
 

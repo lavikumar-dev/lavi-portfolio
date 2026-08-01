@@ -36,20 +36,13 @@ export default function ThemeProvider({ children }) {
 
   // Apply & persist theme
   useEffect(() => {
-  console.log("Current theme:", theme);
+    localStorage.setItem(STORAGE_KEY, theme);
 
-  localStorage.setItem(STORAGE_KEY, theme);
+    document.documentElement.setAttribute("data-theme", theme);
 
-  document.documentElement.setAttribute("data-theme", theme);
+    applyTheme(theme);
+  }, [theme]);
 
-  applyTheme(theme);
-
-  console.log(
-    "Accent:",
-    getComputedStyle(document.documentElement)
-      .getPropertyValue("--accent")
-  );
-}, [theme]);
   // Normal theme switching
   const changeTheme = (newTheme) => {
     if (newTheme === theme) return;
@@ -68,21 +61,31 @@ export default function ThemeProvider({ children }) {
     changeTheme(targetTheme);
   };
 
-  const value = useMemo(
-    () => ({
+  const value = useMemo(() => {
+    const design = themes[theme];
+
+    return {
+      // Theme State
       theme,
       previousTheme,
       isTransitioning,
 
+      // Theme Controls
       setTheme: changeTheme,
-
       enterCrimsonSword,
       exitCrimsonSword,
-
       setIsTransitioning,
-    }),
-    [theme, previousTheme, isTransitioning]
-  );
+
+      // Complete Design Engine
+      design,
+
+      // Shortcuts
+      colors: design.colors,
+      hero: design.copy.hero,
+      about: design.copy.about,
+      contact: design.copy.contact,
+    };
+  }, [theme, previousTheme, isTransitioning]);
 
   return (
     <ThemeContext.Provider value={value}>
