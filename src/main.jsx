@@ -1,14 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Toaster } from "react-hot-toast";
+
 import ThemeProvider from "./personalization/ThemeProvider";
 
 import App from "./App";
+
 import "./index.css";
 import "./personalization/themes.css";
-ReactDOM.createRoot(document.getElementById("root")).render(
+
+ReactDOM.createRoot(
+  document.getElementById("root")
+).render(
   <React.StrictMode>
+
     <ThemeProvider>
+
       <App />
 
       <Toaster
@@ -25,20 +32,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             padding: "16px",
             fontSize: "15px",
           },
-          success: {
-            iconTheme: {
-              primary: "#22d3ee",
-              secondary: "#fff",
-            },
-          },
-          error: {
-            iconTheme: {
-              primary: "#ef4444",
-              secondary: "#fff",
-            },
-          },
         }}
       />
+
     </ThemeProvider>
-  </React.StrictMode>,
+
+  </React.StrictMode>
 );

@@ -1,91 +1,107 @@
 import { useEffect, useMemo, useState } from "react";
+
 import ThemeContext from "./ThemeContext";
 import themes from "./themes";
 
-const STORAGE_KEY = "portfolio-theme";
+import {
+  DEFAULT_THEME,
+  EFFECTS,
+  THEME_STORAGE_KEY,
+} from "../engine/theme";
 
-/**
- * Applies a theme by updating CSS variables.
- */
-const applyTheme = (themeName) => {
-  const selectedTheme = themes[themeName];
+import { applyTheme } from "../engine/theme";
 
-  if (!selectedTheme) return;
-
-  const root = document.documentElement;
-
-  Object.entries(selectedTheme.colors).forEach(([key, value]) => {
-    const cssVariable =
-      "--" + key.replace(/[A-Z]/g, (match) => "-" + match.toLowerCase());
-
-    root.style.setProperty(cssVariable, value);
-  });
-};
-
-export default function ThemeProvider({ children }) {
-  // Current active theme
+export default function ThemeProvider({
+  children,
+}) {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem(STORAGE_KEY) || "ocean";
+    return (
+      localStorage.getItem(THEME_STORAGE_KEY) ??
+      DEFAULT_THEME
+    );
   });
 
-  // Previous theme (used for transitions)
-  const [previousTheme, setPreviousTheme] = useState(null);
+  const [previousTheme, setPreviousTheme] =
+    useState(null);
 
-  // Used later for cinematic transitions
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isTransitioning, setIsTransitioning] =
+    useState(false);
 
-  // Apply & persist theme
+  const [effects, setEffects] =
+    useState(EFFECTS);
+
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, theme);
-
-    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem(
+      THEME_STORAGE_KEY,
+      theme
+    );
 
     applyTheme(theme);
   }, [theme]);
 
-  // Normal theme switching
-  const changeTheme = (newTheme) => {
-    if (newTheme === theme) return;
+  const changeTheme = (nextTheme) => {
+    if (nextTheme === theme) return;
 
     setPreviousTheme(theme);
-    setTheme(newTheme);
+
+    setTheme(nextTheme);
   };
 
-  // Placeholder for future Crimson Sword cinematic
+  const toggleEffect = (effect) => {
+    setEffects((prev) => ({
+      ...prev,
+      [effect]: !prev[effect],
+    }));
+  };
+
   const enterCrimsonSword = () => {
     changeTheme("crimson");
   };
 
-  // Placeholder for exiting Crimson Sword
-  const exitCrimsonSword = (targetTheme = "ocean") => {
-    changeTheme(targetTheme);
+  const exitCrimsonSword = (
+    target = DEFAULT_THEME
+  ) => {
+    changeTheme(target);
   };
 
   const value = useMemo(() => {
     const design = themes[theme];
 
     return {
-      // Theme State
       theme,
+
       previousTheme,
-      isTransitioning,
 
-      // Theme Controls
-      setTheme: changeTheme,
-      enterCrimsonSword,
-      exitCrimsonSword,
-      setIsTransitioning,
-
-      // Complete Design Engine
       design,
 
-      // Shortcuts
       colors: design.colors,
+
       hero: design.copy.hero,
+
       about: design.copy.about,
+
       contact: design.copy.contact,
+
+      effects,
+
+      toggleEffect,
+
+      setTheme: changeTheme,
+
+      enterCrimsonSword,
+
+      exitCrimsonSword,
+
+      isTransitioning,
+
+      setIsTransitioning,
     };
-  }, [theme, previousTheme, isTransitioning]);
+  }, [
+    theme,
+    previousTheme,
+    effects,
+    isTransitioning,
+  ]);
 
   return (
     <ThemeContext.Provider value={value}>
