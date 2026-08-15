@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 
 import { hero } from "../config/hero.config";
 
-import HeroFloatingTags from "./FloatingCards/FloatingTags";
-import OrbitEngine from "./OrbitEngine";
+import ThemeHeroVisual from "./ThemeHeroVisual";
+
+import FloatingCard from "./FloatingCards";
+import { FLOATING_TAGS } from "./FloatingCards";
 
 export default function HeroPortrait() {
   return (
@@ -11,165 +13,218 @@ export default function HeroPortrait() {
       className="
         relative
         mx-auto
+
         flex
         w-full
+
         items-center
         justify-center
 
-        lg:-translate-y-6
+        lg:-translate-x-10
+        xl:-translate-x-14
+
+        lg:translate-y-0
       "
     >
-      {/* =======================================================
-          BACKGROUND GLOW
-      ======================================================= */}
+      {/* =========================================================
+          AMBIENT GLOW
+      ========================================================== */}
 
       <div
         className="
           absolute
           z-0
 
-          h-[720px]
-          w-[720px]
+          h-[clamp(540px,52vw,820px)]
+          w-[clamp(540px,52vw,820px)]
 
           rounded-full
 
-          bg-cyan-500/10
+          bg-[color:var(--accent-soft)]
 
-          blur-[150px]
+          blur-[180px]
         "
       />
 
-      {/* =======================================================
+      {/* =========================================================
           ORBIT ENGINE
-      ======================================================= */}
+      ========================================================== */}
 
       <div
         className="
           absolute
           inset-0
+
           z-10
 
           flex
           items-center
           justify-center
 
-          pointer-events-none
           overflow-visible
+
+          pointer-events-none
+
+          scale-[1.10]
+          xl:scale-[1.16]
         "
       >
-        <OrbitEngine />
+        <ThemeHeroVisual />
       </div>
 
-      {/* =======================================================
-          FLOATING TECH CARDS
-      ======================================================= */}
+      {/* =========================================================
+          PORTRAIT COMPOSITION
+      =========================================================
+      
+      The portrait and floating cards share this wrapper.
 
-      <div className="relative z-30">
-        <HeroFloatingTags />
-      </div>
+      Moving this composition moves the portrait and all cards
+      together.
+      ========================================================== */}
 
-      {/* =======================================================
-          IMAGE FRAME
-      ======================================================= */}
+      <div
+        className="
+          relative
+          z-20
 
-      <motion.div
-        initial={{
-          opacity: 0,
-          y: 40,
-          scale: 0.96,
-        }}
-        animate={{
-          opacity: 1,
-          y: 0,
-          scale: 1,
-        }}
-        transition={{
-          duration: 0.9,
-          ease: [0.22, 1, 0.36, 1],
-        }}
-        className="relative z-20"
+          w-[min(76vw,460px)]
+
+          sm:w-[min(66vw,460px)]
+
+          lg:w-[min(29vw,425px)]
+
+          xl:w-[min(28vw,450px)]
+        "
       >
-        <div
-          className="
-            relative
+        {/* =======================================================
+            FLOATING CARDS
+        ======================================================== */}
 
-            rounded-[34px]
+        {FLOATING_TAGS.map((tag) => (
+          <FloatingCard
+            key={tag.id}
+            tag={tag}
+          />
+        ))}
 
-            border
-            border-cyan-400/15
+        {/* =======================================================
+            PORTRAIT
+        ======================================================== */}
 
-            bg-white/[0.03]
-
-            p-3
-
-            backdrop-blur-2xl
-
-            shadow-[0_30px_90px_rgba(0,0,0,.45)]
-          "
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 45,
+            scale: 0.95,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            scale: 1,
+          }}
+          transition={{
+            duration: 0.9,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="relative w-full"
         >
-          {/* Inner Glass Border */}
+          {/* =====================================================
+              GLASS FRAME
+          ====================================================== */}
 
           <div
-            className="
-              absolute
-              inset-0
-
-              rounded-[34px]
-
-              border
-              border-white/5
-            "
-          />
-
-          {/* Outer Cyan Glow */}
-
-          <div
-            className="
-              absolute
-              inset-[-2px]
-
-              rounded-[36px]
-
-              border
-
-              border-cyan-300/20
-
-              shadow-[0_0_60px_rgba(34,211,238,.22)]
-            "
-          />
-
-          {/* Portrait */}
-
-          <motion.img
-            src={hero.portrait.image}
-            alt={hero.portrait.alt}
-            animate={{
-              y: [-4, 4, -4],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
             className="
               relative
-              z-10
 
-              w-[330px]
+              w-full
 
-              rounded-[26px]
+              rounded-[38px]
 
-              object-cover
+              border
+              border-[color:var(--border)]
 
-              sm:w-[370px]
+              bg-[color:var(--surface)]
 
-              lg:w-[405px]
+              p-4
 
-              xl:w-[440px]
+              backdrop-blur-2xl
+
+              shadow-[var(--surface-shadow)]
             "
-          />
-        </div>
-      </motion.div>
+          >
+            {/* ===================================================
+                INNER GLASS BORDER
+            ==================================================== */}
+
+            <div
+              className="
+                pointer-events-none
+
+                absolute
+                inset-0
+
+                rounded-[38px]
+
+                border
+                border-[color:var(--border)]
+              "
+            />
+
+            {/* ===================================================
+                CYAN RIM
+            ==================================================== */}
+
+            <div
+              className="
+                pointer-events-none
+
+                absolute
+
+                inset-[-3px]
+
+                rounded-[40px]
+
+                border
+
+                border-[color:var(--border)]
+
+                shadow-[0_0_80px_var(--glow)]
+              "
+            />
+
+            {/* ===================================================
+                PORTRAIT IMAGE
+            ==================================================== */}
+
+            <motion.img
+              src={hero.portrait.image}
+              alt={hero.portrait.alt}
+              animate={{
+                y: [-5, 5, -5],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="
+                relative
+                z-10
+
+                block
+
+                w-full
+
+                aspect-[470/610]
+
+                rounded-[30px]
+
+                object-cover
+              "
+            />
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }

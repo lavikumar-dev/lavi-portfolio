@@ -39,8 +39,8 @@ export default function NavDesktop({
 
                 ${
                   selected
-                    ? "text-cyan-400"
-                    : "text-slate-300"
+                    ? "text-[color:var(--accent)]"
+                    : "text-[color:var(--text-secondary)]"
                 }
               `}
             >
@@ -55,7 +55,7 @@ export default function NavDesktop({
                     inset-0
                     -z-10
                     rounded-xl
-                    bg-cyan-500/10
+                    bg-[color:var(--accent-soft)]
                   "
                 />
               )}

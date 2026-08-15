@@ -7,7 +7,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: #030712;
-  color: white;
+  font-family: var(--type-body-font), sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }

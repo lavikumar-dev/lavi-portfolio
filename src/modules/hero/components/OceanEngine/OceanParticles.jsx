@@ -15,13 +15,13 @@ export default function OceanParticles() {
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-cyan-300"
+          className="absolute rounded-full bg-[color:var(--accent)]"
           style={{
             left: `${particle.left}%`,
             top: `${particle.top}%`,
             width: `${particle.size}px`,
             height: `${particle.size}px`,
-            boxShadow: "0 0 18px rgba(34,211,238,.9)",
+            boxShadow: "0 0 18px var(--glow)",
           }}
           animate={{
             y: [0, -35, 0],

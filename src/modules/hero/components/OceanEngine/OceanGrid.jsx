@@ -18,7 +18,7 @@ export default function OceanGrid() {
           className="
             absolute
             inset-0
-            bg-[linear-gradient(to_right,rgba(40,170,255,.065)_1px,transparent_1px)]
+            bg-[linear-gradient(to_right,color-mix(in srgb, var(--accent) 8%, transparent)_1px,transparent_1px)]
             bg-[size:64px_64px]
           "
         />
@@ -28,7 +28,7 @@ export default function OceanGrid() {
           className="
             absolute
             inset-0
-            bg-[linear-gradient(to_bottom,rgba(40,170,255,.065)_1px,transparent_1px)]
+            bg-[linear-gradient(to_bottom,color-mix(in srgb, var(--accent) 8%, transparent)_1px,transparent_1px)]
             bg-[size:64px_64px]
           "
         />
@@ -53,7 +53,7 @@ export default function OceanGrid() {
             -translate-x-1/2
             -translate-y-1/2
             rounded-full
-            bg-cyan-400/5
+            bg-[color:var(--accent-soft)]
             blur-[140px]
           "
         />
@@ -74,7 +74,7 @@ export default function OceanGrid() {
             h-[650px]
             w-[650px]
             rounded-full
-            bg-cyan-400/10
+            bg-[color:var(--accent-soft)]
             blur-[170px]
           "
         />
@@ -95,7 +95,7 @@ export default function OceanGrid() {
             h-[650px]
             w-[650px]
             rounded-full
-            bg-sky-500/10
+            bg-[color:var(--accent-soft)]
             blur-[180px]
           "
         />
@@ -113,13 +113,13 @@ export default function OceanGrid() {
               repeat: Infinity,
               delay: i * 0.35,
             }}
-            className="absolute rounded-full bg-cyan-300"
+            className="absolute rounded-full bg-[color:var(--accent)]"
             style={{
               width: 2 + (i % 3),
               height: 2 + (i % 3),
               left: `${(i * 17) % 100}%`,
               top: `${(i * 11) % 100}%`,
-              boxShadow: "0 0 12px rgba(34,211,238,.9)",
+              boxShadow: "0 0 12px var(--glow)",
             }}
           />
         ))}

@@ -31,14 +31,14 @@ export default function OceanMesh() {
             delay: node.delay,
             ease: "easeInOut",
           }}
-          className="absolute rounded-full bg-cyan-300"
+          className="absolute rounded-full bg-[color:var(--accent)]"
           style={{
             left: `${node.left}%`,
             top: `${node.top}%`,
             width: `${node.size}px`,
             height: `${node.size}px`,
             boxShadow:
-              "0 0 12px rgba(34,211,238,.95), 0 0 24px rgba(34,211,238,.45)",
+              "0 0 12px var(--glow), 0 0 24px var(--glow)",
           }}
         />
       ))}

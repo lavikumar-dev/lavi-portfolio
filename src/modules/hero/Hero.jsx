@@ -14,41 +14,86 @@ export default function Hero() {
         isolate
         min-h-screen
         overflow-hidden
-        pt-20
-        lg:pt-24
+        pt-24
+        lg:pt-28
       "
     >
+      {/* =========================================================
+          HERO BACKGROUND
+      ========================================================== */}
+
       <HeroBackground />
 
-      <Container className="relative z-10">
+      {/* =========================================================
+          HERO CONTAINER
+      ========================================================== */}
+
+      <Container
+        className="
+          relative
+          z-10
+
+          w-full
+          max-w-[1600px]
+
+          px-6
+          sm:px-8
+          md:px-10
+          lg:px-12
+          xl:px-16
+          2xl:px-20
+        "
+      >
+        {/* =======================================================
+            HERO GRID
+        ======================================================== */}
+
         <div
           className="
             grid
-            min-h-[calc(100vh-96px)]
+            min-h-[calc(100vh-112px)]
+
             items-center
-            lg:grid-cols-[1.08fr_.92fr]
+
+            gap-y-16
+            lg:gap-x-8
+            xl:gap-x-12
+
+            lg:grid-cols-[52%_48%]
           "
         >
-          {/* LEFT */}
+          {/* =====================================================
+              LEFT — HERO CONTENT
+          ====================================================== */}
 
           <div
             className="
-              max-w-[640px]
-              justify-self-start
-              lg:pl-6
-              xl:pl-10
+              flex
+              w-full
+
+              justify-start
+
+              lg:max-w-[760px]
             "
           >
             <HeroContent />
           </div>
 
-          {/* RIGHT */}
+          {/* =====================================================
+              RIGHT — HERO PORTRAIT
+          ====================================================== */}
 
           <div
             className="
-              justify-self-end
-              lg:pr-6
-              xl:pr-10
+              flex
+              w-full
+
+              justify-center
+
+              lg:justify-end
+
+              lg:-translate-x-2
+              xl:-translate-x-4
             "
           >
             <HeroPortrait />

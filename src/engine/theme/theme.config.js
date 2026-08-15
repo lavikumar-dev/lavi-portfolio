@@ -1,12 +1,13 @@
-export const THEME_STORAGE_KEY = "astra-theme";
+export const THEME_STORAGE_KEY = "nova-theme";
 
 export const DEFAULT_THEME = "ocean";
 
 export const THEMES = [
   "ocean",
   "midnight",
-  "emerald",
   "light",
+  "emerald",
+  "blossom",
   "crimson",
 ];
 
@@ -19,3 +20,4 @@ export const EFFECTS = {
 };
 
 export const TRANSITION_DURATION = 450;
+export const CRIMSON_TRANSITION_DURATION = 1500;

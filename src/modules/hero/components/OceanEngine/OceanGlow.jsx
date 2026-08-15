@@ -24,7 +24,7 @@ export default function OceanGlow() {
           h-[950px]
           w-[950px]
           rounded-full
-          bg-cyan-500/8
+          bg-[color:var(--accent-soft)]
           blur-[180px]
         "
       />
@@ -47,7 +47,7 @@ export default function OceanGlow() {
           h-[900px]
           w-[900px]
           rounded-full
-          bg-sky-400/10
+          bg-[color:var(--accent-soft)]
           blur-[230px]
         "
       />
@@ -110,13 +110,13 @@ export default function OceanGlow() {
             repeat: Infinity,
             delay: i * 0.6,
           }}
-          className="absolute rounded-full bg-cyan-300"
+          className="absolute rounded-full bg-[color:var(--accent)]"
           style={{
             width: 5,
             height: 5,
             left: `${10 + i * 8}%`,
             top: `${15 + (i % 5) * 14}%`,
-            boxShadow: "0 0 22px rgba(34,211,238,.95)",
+            boxShadow: "0 0 22px var(--glow)",
           }}
         />
       ))}

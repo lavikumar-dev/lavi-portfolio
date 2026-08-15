@@ -14,9 +14,9 @@ export default function HeroBadge() {
 
         border
 
-        border-cyan-400/20
+        border-[color:var(--border)]
 
-        bg-cyan-400/5
+        bg-[color:var(--accent-soft)]
 
         px-5
 
@@ -32,9 +32,9 @@ export default function HeroBadge() {
 
           rounded-full
 
-          bg-emerald-400
+          bg-[color:var(--accent)]
 
-          shadow-[0_0_12px_#4ade80]
+          shadow-[0_0_12px_var(--accent)]
         "
       />
 
@@ -44,7 +44,7 @@ export default function HeroBadge() {
 
           font-medium
 
-          text-slate-300
+          text-[color:var(--text-secondary)]
         "
       >
         {hero.badge.text}

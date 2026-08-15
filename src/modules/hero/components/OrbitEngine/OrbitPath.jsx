@@ -52,7 +52,7 @@ export default function OrbitPath({
       <use
         href={`#orbit-${id}`}
         fill="none"
-        stroke={`rgba(34,211,238,${opacity * 0.18})`}
+        stroke="var(--accent)" opacity={opacity * 0.18}
         strokeWidth="4"
         filter={`url(#blur-${id})`}
       />
@@ -62,7 +62,7 @@ export default function OrbitPath({
       <use
         href={`#orbit-${id}`}
         fill="none"
-        stroke={`rgba(34,211,238,${opacity})`}
+        stroke="var(--accent)" opacity={opacity}
         strokeWidth="1.15"
         strokeLinecap="round"
         strokeDasharray="170 85"
@@ -72,7 +72,7 @@ export default function OrbitPath({
 
       <circle
         r="5"
-        fill="#59f3ff"
+        fill="var(--accent)"
         filter={`url(#blur-${id})`}
       >
         <animateMotion

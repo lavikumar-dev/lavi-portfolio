@@ -47,8 +47,8 @@ export default function NavMobile({
           max-w-sm
           flex-col
           border-l
-          border-white/10
-          bg-slate-950
+          border-[color:var(--border)]
+          bg-[color:var(--surface-strong)]
           p-8
         "
       >
@@ -61,7 +61,7 @@ export default function NavMobile({
 
           <button
             onClick={close}
-            className="rounded-xl p-2 hover:bg-white/5"
+            className="rounded-xl p-2 hover:bg-[color:var(--accent-soft)]"
           >
             <FaTimes size={22} />
           </button>
@@ -88,8 +88,8 @@ export default function NavMobile({
 
                 ${
                   active === link.id
-                    ? "bg-cyan-500/10 text-cyan-400"
-                    : "text-slate-300"
+                    ? "bg-[color:var(--accent-soft)] text-[color:var(--accent)]"
+                    : "text-[color:var(--text-secondary)]"
                 }
               `}
             >

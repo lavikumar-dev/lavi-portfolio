@@ -23,10 +23,10 @@ export default function NavActions({
           className="
             rounded-full
             p-2.5
-            text-slate-300
+            text-[color:var(--text-secondary)]
             transition-all
             duration-300
-            hover:text-cyan-400
+            hover:text-[color:var(--accent)]
             hover:bg-white/5
           "
         >
@@ -40,10 +40,10 @@ export default function NavActions({
           className="
             rounded-full
             p-2.5
-            text-slate-300
+            text-[color:var(--text-secondary)]
             transition-all
             duration-300
-            hover:text-cyan-400
+            hover:text-[color:var(--accent)]
             hover:bg-white/5
           "
         >
@@ -66,13 +66,13 @@ export default function NavActions({
         className="
           rounded-xl
           border
-          border-white/10
+          border-[color:var(--border)]
           p-3
-          text-white
+          text-[color:var(--text-primary)]
           transition-all
           duration-300
-          hover:border-cyan-400
-          hover:text-cyan-400
+          hover:border-[color:var(--border-strong)]
+          hover:text-[color:var(--accent)]
           lg:hidden
         "
       >

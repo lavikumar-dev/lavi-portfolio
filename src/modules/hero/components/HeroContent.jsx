@@ -7,148 +7,219 @@ import HeroRoleSlider from "./HeroRoleSlider";
 
 export default function HeroContent() {
   return (
-    <div className="relative z-10 flex max-w-2xl flex-col">
+    <div
+      className="
+        relative
+        z-10
 
-      {/* Greeting */}
+        flex
+        w-full
+        max-w-[700px]
+
+        flex-col
+      "
+    >
+      {/* =========================================================
+          GREETING
+      ========================================================== */}
 
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45 }}
+        initial={{
+          opacity: 0,
+          y: 14,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 0.45,
+        }}
         className="
           inline-flex
           w-fit
+
           items-center
-          gap-2
+          gap-2.5
+
           rounded-full
+
           border
-          border-cyan-400/20
-          bg-cyan-400/5
+          border-[color:var(--border)]
+
+          bg-[color:var(--accent-soft)]
+
           px-4
-          py-2
+          py-2.5
         "
       >
-        <span className="text-lg">👋</span>
+        <span className="text-base">
+          👋
+        </span>
 
         <span
           className="
             text-sm
             font-medium
             tracking-wide
-            text-slate-300
+            text-[color:var(--text-secondary)]
           "
         >
           Hello, I'm
         </span>
       </motion.div>
 
-      {/* Name */}
+      {/* =========================================================
+          NAME
+      ========================================================== */}
 
       <motion.h1
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.12 }}
+        initial={{
+          opacity: 0,
+          y: 22,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          delay: 0.12,
+        }}
         className="
-          mt-6
+          mt-7
 
-          text-5xl
+          text-[64px]
+          sm:text-[70px]
+          lg:text-[76px]
+          xl:text-[84px]
 
           font-black
 
-          tracking-tight
+          leading-[0.95]
 
-          leading-none
+          tracking-[-0.045em]
 
-          sm:text-6xl
-
-          xl:text-7xl
+          text-[color:var(--text-primary)]
         "
       >
         {hero.name}
       </motion.h1>
 
-      {/* Fixed Role */}
+      {/* =========================================================
+          FIXED ROLE
+      ========================================================== */}
 
       <motion.h2
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: .22 }}
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          delay: 0.22,
+        }}
         className="
           mt-5
 
-          text-xl
+          text-[26px]
+          sm:text-[28px]
+          lg:text-[30px]
 
           font-semibold
 
-          text-slate-300
+          leading-none
 
-          sm:text-2xl
+          text-[color:var(--text-secondary)]
         "
       >
         {hero.role}
       </motion.h2>
 
-      {/* Animated Role */}
+      {/* =========================================================
+          ANIMATED ROLE
+      ========================================================== */}
 
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: .32 }}
-        className="mt-2 h-12 overflow-hidden"
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          delay: 0.32,
+        }}
+        className="
+          mt-2
+
+          h-10
+
+          overflow-hidden
+        "
       >
         <HeroRoleSlider />
       </motion.div>
 
-      {/* Description */}
+      {/* =========================================================
+          DESCRIPTION
+      ========================================================== */}
 
       <motion.p
         initial={{
           opacity: 0,
-          y: 16,
+          y: 14,
         }}
         animate={{
           opacity: 1,
           y: 0,
         }}
         transition={{
-          delay: .42,
+          delay: 0.42,
         }}
         className="
-          mt-7
+          mt-6
 
-          max-w-xl
+          max-w-[630px]
 
-          text-base
+          text-[17px]
+          sm:text-[18px]
+          lg:text-[18px]
 
-          leading-8
+          leading-[1.7]
 
-          text-slate-400
-
-          sm:text-lg
+          text-[color:var(--text-muted)]
         "
       >
         {hero.description}
       </motion.p>
 
-      {/* Buttons */}
+      {/* =========================================================
+          BUTTONS
+      ========================================================== */}
 
       <motion.div
         initial={{
           opacity: 0,
-          y: 20,
+          y: 18,
         }}
         animate={{
           opacity: 1,
           y: 0,
         }}
         transition={{
-          delay: .55,
+          delay: 0.55,
         }}
+        className="
+          mt-8
+        "
       >
         <HeroButtons />
       </motion.div>
 
-      {/* Availability */}
+      {/* =========================================================
+          AVAILABILITY
+      ========================================================== */}
 
       <motion.div
         initial={{
@@ -158,29 +229,26 @@ export default function HeroContent() {
           opacity: 1,
         }}
         transition={{
-          delay: .7,
+          delay: 0.7,
         }}
         className="
-          mt-8
+          mt-7
 
           flex
-
           items-center
-
           gap-3
         "
       >
         <span
           className="
             h-3
-
             w-3
 
             rounded-full
 
-            bg-emerald-400
+            bg-[color:var(--accent)]
 
-            shadow-[0_0_12px_#4ade80]
+            shadow-[0_0_14px_var(--glow)]
           "
         />
 
@@ -190,14 +258,12 @@ export default function HeroContent() {
 
             font-medium
 
-            text-slate-400
+            text-[color:var(--text-muted)]
           "
         >
           Available for Internships
         </span>
-
       </motion.div>
-
     </div>
   );
 }

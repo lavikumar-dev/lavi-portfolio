@@ -18,15 +18,15 @@ export default function HeroButtons() {
         onClick={() => scrollTo(hero.buttons.primary.target)}
         className="
           rounded-xl
-          bg-cyan-400
+          bg-[color:var(--accent)]
           px-7
           py-3.5
           font-semibold
-          text-slate-950
+          text-[color:var(--bg-primary)]
           transition-all
           duration-300
           hover:-translate-y-1
-          hover:shadow-[0_10px_35px_rgba(34,211,238,.35)]
+          hover:shadow-[0_10px_35px_var(--glow)]
         "
       >
         {hero.buttons.primary.text}
@@ -37,16 +37,16 @@ export default function HeroButtons() {
         className="
           rounded-xl
           border
-          border-white/10
-          bg-white/5
+          border-[color:var(--border)]
+          bg-[color:var(--surface)]
           px-7
           py-3.5
           font-semibold
           backdrop-blur-xl
           transition-all
           duration-300
-          hover:border-cyan-400/40
-          hover:bg-cyan-400/5
+          hover:border-[color:var(--border-strong)]
+          hover:bg-[color:var(--accent-soft)]
         "
       >
         {hero.buttons.secondary.text}

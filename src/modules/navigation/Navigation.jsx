@@ -97,7 +97,7 @@ export default function Navigation() {
 
               border
 
-              border-white/10
+              border-[color:var(--border)]
 
               px-6
 
@@ -111,8 +111,8 @@ export default function Navigation() {
 
               ${
                 scrolled
-                  ? "bg-slate-950/80 shadow-2xl"
-                  : "bg-slate-950/45"
+                  ? "bg-[color:var(--surface-strong)] shadow-[var(--surface-shadow)]"
+                  : "bg-[color:var(--surface)]"
               }
             `}
           >

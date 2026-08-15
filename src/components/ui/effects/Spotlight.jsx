@@ -1,32 +1,42 @@
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import useTheme from "../../../personalization/hooks/useTheme";
 
 export default function Spotlight() {
-  const mouseX = useMotionValue(window.innerWidth / 2);
-  const mouseY = useMotionValue(window.innerHeight / 2);
+  const { effects, design } = useTheme();
+  const [desktop, setDesktop] = useState(false);
 
-  const x = useSpring(mouseX, {
-    stiffness: 120,
-    damping: 25,
-  });
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-  const y = useSpring(mouseY, {
-    stiffness: 120,
-    damping: 25,
-  });
+  const x = useSpring(mouseX, { stiffness: 120, damping: 25 });
+  const y = useSpring(mouseY, { stiffness: 120, damping: 25 });
 
   useEffect(() => {
-    const move = (e) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
+    const update = () => {
+      setDesktop(window.innerWidth >= 1024);
+      mouseX.set(window.innerWidth / 2);
+      mouseY.set(window.innerHeight / 2);
+    };
+
+    update();
+    window.addEventListener("resize", update);
+
+    const move = (event) => {
+      mouseX.set(event.clientX);
+      mouseY.set(event.clientY);
     };
 
     window.addEventListener("mousemove", move);
 
     return () => {
+      window.removeEventListener("resize", update);
       window.removeEventListener("mousemove", move);
     };
   }, [mouseX, mouseY]);
+
+  if (!desktop || !effects.spotlight) return null;
 
   return (
     <motion.div
@@ -37,8 +47,9 @@ export default function Spotlight() {
         translateX: "-50%",
         translateY: "-50%",
         background:
-          "radial-gradient(circle, rgba(34,211,238,0.12) 0%, rgba(34,211,238,0.05) 35%, transparent 75%)",
+          "radial-gradient(circle, color-mix(in srgb, var(--accent) 13%, transparent) 0%, color-mix(in srgb, var(--accent) 5%, transparent) 35%, transparent 75%)",
         filter: "blur(70px)",
+        opacity: design.motion.style === "minimal" ? 0.55 : 1,
       }}
     />
   );

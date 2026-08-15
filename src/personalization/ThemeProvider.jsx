@@ -1,107 +1,134 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import ThemeContext from "./ThemeContext";
-import themes from "./themes";
 
 import {
   DEFAULT_THEME,
   EFFECTS,
+  THEMES,
   THEME_STORAGE_KEY,
+  applyTheme,
+  getTheme,
+  themes,
 } from "../engine/theme";
 
-import { applyTheme } from "../engine/theme";
+function readStoredTheme() {
+  if (typeof window === "undefined") return DEFAULT_THEME;
 
-export default function ThemeProvider({
-  children,
-}) {
-  const [theme, setTheme] = useState(() => {
-    return (
-      localStorage.getItem(THEME_STORAGE_KEY) ??
-      DEFAULT_THEME
-    );
-  });
+  const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
 
-  const [previousTheme, setPreviousTheme] =
-    useState(null);
+  return THEMES.includes(stored) ? stored : DEFAULT_THEME;
+}
 
-  const [isTransitioning, setIsTransitioning] =
-    useState(false);
-
-  const [effects, setEffects] =
-    useState(EFFECTS);
+export default function ThemeProvider({ children }) {
+  const [theme, setThemeState] = useState(readStoredTheme);
+  const [previousTheme, setPreviousTheme] = useState(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionType, setTransitionType] = useState(null);
+  const [effects, setEffects] = useState(EFFECTS);
+  const transitionTimer = useRef(null);
 
   useEffect(() => {
-    localStorage.setItem(
-      THEME_STORAGE_KEY,
-      theme
-    );
-
     applyTheme(theme);
+
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+    }
+
+    return () => {
+      if (transitionTimer.current) {
+        window.clearTimeout(transitionTimer.current);
+      }
+    };
   }, [theme]);
 
-  const changeTheme = (nextTheme) => {
-    if (nextTheme === theme) return;
+  const changeTheme = useCallback((nextTheme) => {
+    if (!THEMES.includes(nextTheme) || nextTheme === theme) return;
+
+    if (transitionTimer.current) {
+      window.clearTimeout(transitionTimer.current);
+    }
+
+    const enteringCrimson = nextTheme === "crimson" && theme !== "crimson";
+    const leavingCrimson = theme === "crimson" && nextTheme !== "crimson";
 
     setPreviousTheme(theme);
 
-    setTheme(nextTheme);
-  };
+    if (enteringCrimson) {
+      setTransitionType("crimson-enter");
+      setIsTransitioning(true);
+
+      transitionTimer.current = window.setTimeout(() => {
+        setThemeState(nextTheme);
+
+        transitionTimer.current = window.setTimeout(() => {
+          setIsTransitioning(false);
+          setTransitionType(null);
+        }, 650);
+      }, 850);
+
+      return;
+    }
+
+    if (leavingCrimson) {
+      setTransitionType("crimson-exit");
+      setIsTransitioning(true);
+
+      transitionTimer.current = window.setTimeout(() => {
+        setThemeState(nextTheme);
+        setIsTransitioning(false);
+        setTransitionType(null);
+      }, 420);
+
+      return;
+    }
+
+    setThemeState(nextTheme);
+  }, [theme]);
 
   const toggleEffect = (effect) => {
-    setEffects((prev) => ({
-      ...prev,
-      [effect]: !prev[effect],
+    setEffects((previous) => ({
+      ...previous,
+      [effect]: !previous[effect],
     }));
   };
 
-  const enterCrimsonSword = () => {
-    changeTheme("crimson");
-  };
+  const enterCrimsonSword = useCallback(() => changeTheme("crimson"), [changeTheme]);
 
-  const exitCrimsonSword = (
-    target = DEFAULT_THEME
-  ) => {
-    changeTheme(target);
-  };
+  const exitCrimsonSword = useCallback(
+    (target = DEFAULT_THEME) => {
+      changeTheme(target === "crimson" ? DEFAULT_THEME : target);
+    },
+    [changeTheme]
+  );
 
-  const value = useMemo(() => {
-    const design = themes[theme];
+  const design = getTheme(theme);
 
-    return {
+  const value = useMemo(
+    () => ({
       theme,
-
       previousTheme,
-
       design,
+      themes,
+      themeIds: THEMES,
 
       colors: design.colors,
-
       hero: design.copy.hero,
-
       about: design.copy.about,
-
       contact: design.copy.contact,
 
       effects,
-
       toggleEffect,
 
       setTheme: changeTheme,
-
       enterCrimsonSword,
-
       exitCrimsonSword,
 
       isTransitioning,
-
-      setIsTransitioning,
-    };
-  }, [
-    theme,
-    previousTheme,
-    effects,
-    isTransitioning,
-  ]);
+      transitionType,
+    }),
+    [theme, previousTheme, design, effects, isTransitioning, transitionType, changeTheme, enterCrimsonSword, exitCrimsonSword]
+  );
 
   return (
     <ThemeContext.Provider value={value}>

@@ -1,60 +1,31 @@
-import OceanGrid from "./OceanEngine/OceanGrid";
-import OceanGlow from "./OceanEngine/OceanGlow";
-import OceanEngine from "./OceanEngine/OceanEngine";
+import ThemeHeroBackground from "./ThemeHeroBackground";
 
 export default function HeroBackground() {
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden">
+      <ThemeHeroBackground />
 
-      {/* Ocean Base */}
-      <div className="absolute inset-0 bg-[#050816]" />
-
-      {/* Premium Grid */}
-      <OceanGrid />
-
-      {/* Ambient Ocean Glow */}
-      <OceanGlow />
-
-      {/* Ocean Animation Engine */}
-      <OceanEngine />
-
-      {/* Dark Edge Vignette */}
       <div
-        className="
-          absolute
-          inset-0
-          pointer-events-none
-          bg-[radial-gradient(circle_at_center,transparent_45%,rgba(5,8,22,.55)_100%)]
-        "
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle at center, transparent 42%, color-mix(in srgb, var(--bg-primary) 62%, transparent) 100%)",
+        }}
       />
 
-      {/* Top Fade */}
       <div
-        className="
-          absolute
-          inset-x-0
-          top-0
-          h-44
-          bg-gradient-to-b
-          from-[#050816]
-          to-transparent
-        "
+        className="absolute inset-x-0 top-0 h-44"
+        style={{
+          background: "linear-gradient(to bottom, var(--bg-primary), transparent)",
+        }}
       />
 
-      {/* Bottom Fade */}
       <div
-        className="
-          absolute
-          inset-x-0
-          bottom-0
-          h-64
-          bg-gradient-to-t
-          from-[#050816]
-          via-[#050816]/70
-          to-transparent
-        "
+        className="absolute inset-x-0 bottom-0 h-64"
+        style={{
+          background: "linear-gradient(to top, var(--bg-primary), color-mix(in srgb, var(--bg-primary) 72%, transparent), transparent)",
+        }}
       />
-
     </div>
   );
 }

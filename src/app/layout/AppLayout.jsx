@@ -10,10 +10,34 @@ import Spotlight from "../../components/ui/effects/Spotlight";
 import Cursor from "../../components/ui/cursor/Cursor";
 import CursorTrail from "../../components/ui/cursor/CursorTrail";
 
+import ThemeWorldBackground from "../../engine/theme/ThemeWorldBackground";
+import ThemeTransitionOverlay from "../../engine/theme/ThemeTransitionOverlay";
+
+import ThemeEngineTester from "../../personalization/components/ThemeEngineTester";
+
 export default function AppLayout() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-slate-950 text-white">
-      {/* Global Effects */}
+    <div
+      className="
+        relative
+        isolate
+        min-h-screen
+        overflow-x-hidden
+        bg-primary
+        text-primary
+      "
+    >
+      {/* =========================================================
+          GLOBAL THEME ENVIRONMENT
+      ========================================================== */}
+
+      <ThemeWorldBackground />
+
+      <ThemeTransitionOverlay />
+
+      {/* =========================================================
+          GLOBAL INTERACTION EFFECTS
+      ========================================================== */}
 
       <Spotlight />
 
@@ -21,13 +45,17 @@ export default function AppLayout() {
 
       <Cursor />
 
-      {/* Navigation */}
+      {/* =========================================================
+          NAVIGATION
+      ========================================================== */}
 
       <Navigation />
 
-      {/* Main */}
+      {/* =========================================================
+          MAIN PORTFOLIO
+      ========================================================== */}
 
-      <main className="relative isolate">
+      <main className="relative z-10 isolate">
         <Hero />
 
         <About />
@@ -38,6 +66,16 @@ export default function AppLayout() {
 
         <Contact />
       </main>
+
+      {/* =========================================================
+          TEMPORARY THEME ENGINE TESTER
+
+          This is intentionally mounted globally so we can
+          verify every theme before building the final
+          premium Theme Selector UI.
+      ========================================================== */}
+
+      <ThemeEngineTester />
     </div>
   );
 }

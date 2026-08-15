@@ -1,11 +1,11 @@
 .app {
   min-height: 100vh;
-  background: #0f172a;
+  background: var(--bg-primary);
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
+  color: var(--text-primary);
 }
 
 .hero{
