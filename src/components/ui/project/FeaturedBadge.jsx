@@ -6,33 +6,35 @@ function FeaturedBadge({ show }) {
   return (
     <motion.div
       animate={{
-        y: [0, -8, 0],
+        opacity: [0.8, 1, 0.8],
       }}
       transition={{
-        duration: 4,
+        duration: 3,
         repeat: Infinity,
         ease: "easeInOut",
       }}
       className="
-        absolute
-        top-6
-        right-6
-        z-30
+        inline-flex
+        items-center
+        gap-1.5
         rounded-full
         border
-        border-cyan-400/30
-        bg-cyan-400/10
-        px-5
-        py-2
-        text-xs
+        border-[color:var(--accent)]/30
+        bg-[color:var(--accent-soft)]
+        px-3
+        py-1
+        text-[10px]
         font-semibold
         uppercase
-        tracking-[0.3em]
-        text-cyan-300
-        backdrop-blur-xl
-        shadow-[0_0_25px_rgba(34,211,238,0.15)]
+        tracking-[0.25em]
+        text-[color:var(--accent)]
       "
     >
+      <span
+        className="h-1.5 w-1.5 rounded-full bg-[color:var(--accent)]"
+        style={{ boxShadow: "0 0 8px var(--glow)" }}
+        aria-hidden="true"
+      />
       Featured
     </motion.div>
   );

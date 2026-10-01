@@ -43,6 +43,42 @@ export const portfolio = {
     },
   ],
 
+  /**
+   * Skills are the single source of truth for both the Skills section
+   * and About "What I Do" service cards. icon keys map to react-icons in
+   * the consuming components.
+   */
+  skills: [
+    {
+      key: "programming",
+      iconKey: "code",
+      title: "Programming",
+      description: "Building fundamentals through problem-solving, coursework, and projects.",
+      technologies: ["C", "C++", "Python", "Java"],
+    },
+    {
+      key: "web",
+      iconKey: "globe",
+      title: "Web Development",
+      description: "Responsive web apps with React, Tailwind CSS, Framer Motion and Vite.",
+      technologies: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS", "Vite"],
+    },
+    {
+      key: "game",
+      iconKey: "gamepad",
+      title: "Game Development",
+      description: "Interactive experiences in Unity (Project Astra) and Godot (Kurukshetra).",
+      technologies: ["Unity", "Godot", "C#", "GDScript"],
+    },
+    {
+      key: "ai",
+      iconKey: "robot",
+      title: "AI & Developer Tools",
+      description: "Using AI tools and modern workflows to ship better software faster.",
+      technologies: ["Generative AI", "Git", "GitHub", "VS Code"],
+    },
+  ],
+
   projects: [
     {
       id: 1,
