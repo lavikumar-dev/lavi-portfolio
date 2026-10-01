@@ -14,12 +14,12 @@ const ICON_MAP = {
 function Skills() {
   const { theme } = useTheme();
   return (
-    <section id="skills" className={`theme-skills theme-skills-${theme} relative overflow-hidden py-28 md:py-36`}>
+    <section id="skills" aria-labelledby="skills-heading" className={`theme-skills theme-skills-${theme} relative overflow-hidden py-28 md:py-36`}>
       <ThemeSectionWorld section="skills" />
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
           <p className="section-theme-eyebrow">Capabilities & Tools</p>
-          <h2 className="section-theme-title mt-5">C, React, Unity, Godot — and Growing</h2>
+          <h2 id="skills-heading" className="section-theme-title mt-5">C, React, Unity, Godot — and Growing</h2>
           <p className="section-theme-description mx-auto mt-6 max-w-3xl">Every project at Chandigarh University and beyond teaches me something new. These are the technologies I use regularly and the areas I am actively developing.</p>
         </motion.div>
 

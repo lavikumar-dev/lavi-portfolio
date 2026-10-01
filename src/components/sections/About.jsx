@@ -237,7 +237,7 @@ function About() {
   }), [data.services]);
 
   return (
-    <section id="about" className={`about-world about-world-${theme} relative overflow-hidden`}>
+    <section id="about" aria-labelledby="about-heading" className={`about-world about-world-${theme} relative overflow-hidden`}>
       <div className="about-world-noise" aria-hidden="true" />
       <div className="about-world-vignette" aria-hidden="true" />
 
@@ -247,7 +247,7 @@ function About() {
             <motion.div initial={{ opacity: 0, y: reducedMotion ? 0 : 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.55 }}>
               <SectionEyebrow>About Me</SectionEyebrow>
             </motion.div>
-            <motion.h2 initial={{ opacity: 0, y: reducedMotion ? 0 : 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ delay: 0.05, duration: 0.62 }} className="about-title">{data.title}</motion.h2>
+            <motion.h2 id="about-heading" initial={{ opacity: 0, y: reducedMotion ? 0 : 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ delay: 0.05, duration: 0.62 }} className="about-title">{data.title}</motion.h2>
             <motion.p initial={{ opacity: 0, y: reducedMotion ? 0 : 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ delay: 0.11, duration: 0.58 }} className="about-description">{data.description}</motion.p>
             <motion.button type="button" initial={{ opacity: 0, y: reducedMotion ? 0 : 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ delay: 0.17, duration: 0.52 }} whileHover={reducedMotion ? undefined : { y: -3, scale: 1.01 }} whileTap={reducedMotion ? undefined : { scale: 0.985 }} onClick={() => { playUiSound("click"); document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" }); }} className="about-primary-cta">
               <span className="about-cta-spark" aria-hidden="true">✦</span><span>{data.cta ?? "Let's build something meaningful together."}</span><FaArrowRight aria-hidden="true" />
