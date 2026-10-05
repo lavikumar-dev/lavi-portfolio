@@ -1,129 +1,160 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
 import ThemeContext from "./ThemeContext";
-import themes, {
-  defaultTheme,
-  getTheme,
-  themeOrder,
-} from "./themes";
+import themes from "../engine/theme/theme.registry";
 
-const STORAGE_KEY = "portfolio-theme";
+import {
+  DEFAULT_THEME,
+  EFFECTS,
+  THEMES,
+  THEME_STORAGE_KEY,
+  TRANSITION_DURATION,
+} from "../engine/theme/theme.config";
 
-const toCssVariable = (key) =>
-  `--${key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`)}`;
+import { applyTheme } from "../engine/theme/theme.utils";
 
-const applyTheme = (themeName) => {
-  const design = getTheme(themeName);
-  const root = document.documentElement;
-  const { colors, tokens } = design;
+function getStoredTheme() {
+  if (typeof window === "undefined") return DEFAULT_THEME;
 
-  Object.entries(colors).forEach(([key, value]) => {
-    root.style.setProperty(toCssVariable(key), value);
-  });
-
-  root.style.setProperty("--font-body", tokens.typography.bodyFont);
-  root.style.setProperty("--font-display", tokens.typography.displayFont);
-  root.style.setProperty("--font-body-weight", tokens.typography.bodyWeight);
-  root.style.setProperty("--font-display-weight", tokens.typography.displayWeight);
-  root.style.setProperty("--space-section", tokens.spacing.section);
-  root.style.setProperty("--space-section-compact", tokens.spacing.sectionCompact);
-  root.style.setProperty("--content-width", tokens.spacing.contentWidth);
-  root.style.setProperty("--surface-card", tokens.surface.card);
-  root.style.setProperty("--surface-elevated", tokens.surface.elevated);
-  root.style.setProperty("--radius-card", tokens.surface.borderRadius);
-  root.style.setProperty("--shadow-card", tokens.surface.shadow);
-  root.style.setProperty("--radius-button", tokens.button.radius);
-  root.style.setProperty("--button-text-transform", tokens.button.textTransform);
-  root.style.setProperty("--shadow-button", tokens.button.shadow);
-  root.style.setProperty("--atmosphere-primary", tokens.atmosphere.primaryGlow);
-  root.style.setProperty("--atmosphere-secondary", tokens.atmosphere.secondaryGlow);
-  root.style.setProperty("--particle-color", tokens.atmosphere.particleColor);
-  root.style.setProperty("--motion-easing", tokens.motion.easing);
-  root.style.setProperty("--motion-duration", tokens.motion.duration);
-  root.style.setProperty("--motion-hover-lift", tokens.motion.hoverLift);
-  root.style.setProperty("--motion-ambient-speed", tokens.motion.ambientSpeed);
-
-  root.dataset.theme = design.id;
-  root.dataset.atmosphere = tokens.atmosphere.treatment;
-  root.dataset.decoration = tokens.atmosphere.decoration;
-};
-
-const getStoredTheme = () => {
-  const storedTheme = localStorage.getItem(STORAGE_KEY);
-
-  return themes[storedTheme] ? storedTheme : defaultTheme;
-};
+  const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
+  return THEMES.includes(stored) ? stored : DEFAULT_THEME;
+}
 
 export default function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(getStoredTheme);
   const [previousTheme, setPreviousTheme] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const transitionTimeout = useRef(null);
+  const [transitionType, setTransitionType] = useState(null);
+  const [effects, setEffects] = useState(EFFECTS);
+  const timerRef = useRef(null);
+
+  const design = themes[theme] ?? themes[DEFAULT_THEME];
+  const fallbackCopy = themes[DEFAULT_THEME]?.copy ?? {
+    hero: { badge: "", title: "", subtitle: "" },
+    about: { title: "", description: "" },
+    contact: { heading: "", quote: [], footer: [], button: "", signature: "" },
+    projects: { title: "Selected Projects", description: "", cta: "Explore the work." },
+  };
+  const copy = design?.copy ?? fallbackCopy;
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, theme);
     applyTheme(theme);
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
   }, [theme]);
 
-  useEffect(
-    () => () => {
-      window.clearTimeout(transitionTimeout.current);
-    },
-    [],
-  );
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        window.clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   const changeTheme = useCallback(
     (nextTheme) => {
-      if (!themes[nextTheme] || nextTheme === theme) return;
+      if (!THEMES.includes(nextTheme) || nextTheme === theme) return;
+
+      if (timerRef.current) {
+        window.clearTimeout(timerRef.current);
+      }
+
+      const enteringCrimson =
+        nextTheme === "crimson" && theme !== "crimson";
+      const leavingCrimson =
+        theme === "crimson" && nextTheme !== "crimson";
 
       setPreviousTheme(theme);
-      setIsTransitioning(true);
-      setTheme(nextTheme);
 
-      window.clearTimeout(transitionTimeout.current);
-      transitionTimeout.current = window.setTimeout(() => {
-        setIsTransitioning(false);
-      }, 520);
+      if (enteringCrimson) {
+        setTransitionType("crimson-enter");
+        setIsTransitioning(true);
+
+        timerRef.current = window.setTimeout(() => {
+          setTheme(nextTheme);
+
+          timerRef.current = window.setTimeout(() => {
+            setIsTransitioning(false);
+            setTransitionType(null);
+          }, 650);
+        }, 850);
+
+        return;
+      }
+
+      if (leavingCrimson) {
+        setTransitionType("crimson-exit");
+        setIsTransitioning(true);
+
+        timerRef.current = window.setTimeout(() => {
+          setTheme(nextTheme);
+          setIsTransitioning(false);
+          setTransitionType(null);
+        }, TRANSITION_DURATION);
+
+        return;
+      }
+
+      setTheme(nextTheme);
     },
-    [theme],
+    [theme]
   );
+
+  const toggleEffect = useCallback((effect) => {
+    setEffects((previous) => ({
+      ...previous,
+      [effect]: !previous[effect],
+    }));
+  }, []);
 
   const enterCrimsonSword = useCallback(
     () => changeTheme("crimson"),
-    [changeTheme],
+    [changeTheme]
   );
 
   const exitCrimsonSword = useCallback(
-    (targetTheme = defaultTheme) => changeTheme(targetTheme),
-    [changeTheme],
+    (target = DEFAULT_THEME) => {
+      changeTheme(target === "crimson" ? DEFAULT_THEME : target);
+    },
+    [changeTheme]
   );
 
-  const value = useMemo(() => {
-    const design = getTheme(theme);
-
-    return {
+  const value = useMemo(
+    () => ({
       theme,
       previousTheme,
-      isTransitioning,
+      design,
+      themes,
+      themeIds: THEMES,
+
+      colors: design?.colors ?? {},
+      hero: copy.hero,
+      about: copy.about,
+      contact: copy.contact,
+      projects: copy.projects,
+
+      effects,
+      toggleEffect,
+
       setTheme: changeTheme,
       enterCrimsonSword,
       exitCrimsonSword,
-      setIsTransitioning,
+
+      isTransitioning,
+      transitionType,
+    }),
+    [
+      theme,
+      previousTheme,
       design,
-      colors: design.colors,
-      tokens: design.tokens,
-      hero: design.copy.hero,
-      about: design.copy.about,
-      contact: design.copy.contact,
-      themeOptions: themeOrder.map((id) => themes[id]),
-    };
-  }, [
-    changeTheme,
-    enterCrimsonSword,
-    exitCrimsonSword,
-    isTransitioning,
-    previousTheme,
-    theme,
-  ]);
+      effects,
+      isTransitioning,
+      transitionType,
+      changeTheme,
+      enterCrimsonSword,
+      exitCrimsonSword,
+      toggleEffect,
+    ]
+  );
 
   return (
     <ThemeContext.Provider value={value}>

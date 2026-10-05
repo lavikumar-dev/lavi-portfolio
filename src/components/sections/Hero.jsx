@@ -15,15 +15,9 @@ function Hero() {
         flex
         items-center
         justify-center
-        px-4
-        pt-24
-        pb-12
-        sm:px-6
-        sm:pt-28
-        sm:pb-16
+        px-5
+        py-20
         lg:px-8
-        lg:pt-32
-        lg:pb-20
         xl:px-12
       "
     >
@@ -40,8 +34,7 @@ function Hero() {
           w-full
           max-w-7xl
           items-center
-          gap-6
-          sm:gap-10
+          gap-12
           md:gap-16
           xl:gap-20
           xl:grid-cols-2
@@ -78,4 +71,4 @@ function Hero() {
   );
 }
 
-export default Hero;
+export default Hero;

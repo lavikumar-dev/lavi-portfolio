@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBars, FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion } from "framer-motion";
 
@@ -13,29 +13,19 @@ import ThemeSwitcher from "./ThemeSwitcher";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [visible, setVisible] = useState(true);
   const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [loadingResume, setLoadingResume] = useState(false);
-  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrolled(currentScrollY > 20);
-
-      if (currentScrollY > 80 && currentScrollY > lastScrollY.current) {
-        setVisible(false);
-      } else if (currentScrollY < lastScrollY.current) {
-        setVisible(true);
-      }
-      lastScrollY.current = currentScrollY;
+      setScrolled(window.scrollY > 20);
 
       const sections = navLinks
         .map((link) => document.getElementById(link.id))
         .filter(Boolean);
 
-      const scrollPosition = currentScrollY + 120;
+      const scrollPosition = window.scrollY + 120;
 
       for (const section of sections) {
         if (
@@ -48,7 +38,7 @@ function Navbar() {
     };
 
     handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -89,11 +79,11 @@ function Navbar() {
     <>
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
-        animate={{ y: visible ? 0 : -110, opacity: visible ? 1 : 0 }}
-        transition={{ duration: 0.35, ease: "easeInOut" }}
-        className="fixed inset-x-0 top-0 z-50 pointer-events-auto"
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="fixed inset-x-0 top-0 z-50"
       >
-        <div className="mx-auto w-full max-w-7xl px-4 pt-3 sm:px-5 lg:px-6">
+        <div className="mx-auto w-full max-w-7xl px-4 pt-5 sm:px-5 lg:px-6">
           <div
             className={`
               navbar
@@ -103,15 +93,15 @@ function Navbar() {
               justify-between
               rounded-3xl
               border
-              px-3.5
-              py-2
+              px-4
+              py-3
               transition-all
               duration-300
               ease-out
-              sm:px-4
-              sm:py-2.5
-              lg:px-5
-              lg:py-3
+              sm:px-5
+              sm:py-3.5
+              lg:px-6
+              lg:py-4
             `}
           >
             <Logo onClick={() => handleNavClick("home")} />
@@ -176,4 +166,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Navbar;

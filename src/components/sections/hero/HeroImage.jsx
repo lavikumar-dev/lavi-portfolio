@@ -21,11 +21,11 @@ function HeroImage() {
       <div
         className="
           absolute
-          h-[14rem]
-          w-[14rem]
+          h-[24rem]
+          w-[24rem]
           rounded-full
           bg-cyan-500/15
-          blur-[60px]
+          blur-[90px]
 
           sm:h-[28rem]
           sm:w-[28rem]
@@ -49,19 +49,18 @@ function HeroImage() {
           relative
           z-20
 
-          rounded-[1.2rem]
-          sm:rounded-[1.6rem]
+          rounded-[1.6rem]
           border
           border-white/10
           bg-white/5
 
-          p-2
+          p-3
           sm:p-4
 
           backdrop-blur-2xl
         "
       >
-        <div className="absolute inset-0 rounded-[1.2rem] sm:rounded-[1.6rem] border border-cyan-400/10" />
+        <div className="absolute inset-0 rounded-[1.6rem] border border-cyan-400/10" />
 
         <img
           src={heroImage}
@@ -70,14 +69,11 @@ function HeroImage() {
             relative
             z-10
 
-            h-[200px]
-            w-[150px]
+            h-[360px]
+            w-[270px]
 
-            rounded-[1rem]
+            rounded-[1.3rem]
             object-cover
-
-            xs:h-[240px]
-            xs:w-[180px]
 
             sm:h-[430px]
             sm:w-[320px]
@@ -96,4 +92,4 @@ function HeroImage() {
   );
 }
 
-export default HeroImage;
+export default HeroImage;

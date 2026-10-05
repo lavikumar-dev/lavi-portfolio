@@ -29,7 +29,7 @@ function ProjectCard({ project, index, onCaseStudy }) {
         delay: index * 0.05,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className={`
+      className={`theme-project-card
         grid
         items-center
         gap-14 lg:gap-20

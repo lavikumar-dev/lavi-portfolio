@@ -7,7 +7,31 @@ html {
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: #030712;
-  color: white;
+  font-family: var(--type-body-font), sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+::selection {
+  background: var(--selection);
+  color: var(--text-primary);
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  transition: background-color var(--theme-transition), color var(--theme-transition);
+}
+
+button,
+a,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
