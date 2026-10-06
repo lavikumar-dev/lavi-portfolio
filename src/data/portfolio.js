@@ -82,7 +82,13 @@ export const portfolio = {
         "A personal Unity project focused on learning third-person game development. Through this project, I'm exploring character movement, animations, camera systems, UI, and gameplay mechanics while continuously improving my game development skills.",
 
       overview:
-        "Project Astra is my largest ongoing Unity project. It serves as a learning playground where I experiment with modern game development concepts while gradually building a polished third-person experience.",
+        "Project Astra is my ongoing Unity project for learning how a third-person game is built from the ground up. I use it as a practical space to experiment with movement, animation, camera systems, UI, and gameplay instead of learning each topic in isolation.",
+
+      caseStudyText:
+        "Astra started as a simple Unity prototype and is gradually becoming a more complete third-person experience. The main goal is to understand how the different parts of a game work together. I have been working on character movement, animation transitions, camera behaviour, UI, and the basic gameplay systems behind the experience.",
+
+      caseStudyLearning:
+        "The project has mainly helped me understand Unity workflows, C# scripting, animation systems, character controllers, and the small details that make movement feel better." ,
 
       highlights: [
         "Third-person controller",
@@ -110,10 +116,6 @@ export const portfolio = {
         astraImg,
         astraImg,
       ],
-
-      github: "#",
-
-      demo: "#",
     },
 
     {
@@ -152,7 +154,13 @@ export const portfolio = {
         "Built during a university hackathon, this Godot project is inspired by the Mahabharata. It helped me understand gameplay logic, collision detection, enemy behavior, and event-driven programming while collaborating in a team.",
 
       overview:
-        "Kurukshetra was developed within a limited time during AI Fest. The project strengthened my understanding of teamwork, rapid prototyping, and game mechanics under deadlines.",
+        "Kurukshetra was developed during AI Fest as a fast-paced 2D action game inspired by the Mahabharata. The project focused on getting the main gameplay loop working within a limited time while working as a team.",
+
+      caseStudyText:
+        "Kurukshetra is a 2D action game built in Godot during a university gameathon. The player fights through waves of enemies in a Mahabharata-inspired setting. Because the project had to be completed quickly, the team focused on the core gameplay, enemy behaviour, collisions, and making the prototype playable.",
+
+      caseStudyLearning:
+        "This project gave me practical experience with Godot, GDScript, gameplay logic, enemy spawning, debugging, and collaborating with a team under a deadline." ,
 
       highlights: [
         "Enemy AI",
@@ -180,10 +188,6 @@ export const portfolio = {
         kurukshetraImg,
         kurukshetraImg,
       ],
-
-      github: "#",
-
-      demo: "#",
     },
 
     {
@@ -222,7 +226,13 @@ export const portfolio = {
         "A modern portfolio website built to showcase my learning journey and projects. Creating this portfolio has helped me strengthen my React, Tailwind CSS, Framer Motion, and UI design skills.",
 
       overview:
-        "Instead of using a template, I chose to design and build this portfolio from scratch to improve both my frontend development and UI design skills.",
+        "Instead of using a ready-made template, I chose to build this portfolio from scratch so I could improve both my frontend development and UI design skills.",
+
+      caseStudyText:
+        "This portfolio is a React-based project built to present my work, skills, and learning journey in a more interactive way. I designed the interface myself and used reusable components, responsive layouts, animations, and theme-based visuals to make the site feel more like a product than a simple profile page.",
+
+      caseStudyLearning:
+        "Building it has improved my understanding of React architecture, Framer Motion, Tailwind CSS, responsive design, component reuse, and how small interaction details affect the overall user experience." ,
 
       highlights: [
         "Responsive UI",
@@ -250,10 +260,6 @@ export const portfolio = {
         portfolioImg,
         portfolioImg,
       ],
-
-      github: "#",
-
-      demo: "#",
     },
   ],
 };

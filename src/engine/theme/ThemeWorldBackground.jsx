@@ -66,29 +66,15 @@ function MidnightWorld() {
   return (
     <>
       <div className="world-midnight-grid" />
-      <svg
-        className="world-midnight-network"
-        viewBox="0 0 1000 800"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <g
-          fill="none"
-          stroke="var(--accent)"
-          strokeOpacity=".08"
-          strokeWidth="1"
-        >
+      <svg className="world-midnight-network" viewBox="0 0 1000 800" preserveAspectRatio="none" aria-hidden="true">
+        <g fill="none" stroke="var(--accent)" strokeOpacity=".08" strokeWidth="1">
           <path d="M70 610 260 420 420 560 590 250 770 420 930 170" />
           <path d="M110 170 310 320 510 120 720 340 900 280" />
           <path d="M260 420 310 320M420 560 590 250M770 420 900 280" />
         </g>
       </svg>
       {nodes.map((node, index) => (
-        <span
-          key={index}
-          className="world-midnight-node"
-          style={{ left: node.left, top: node.top, animationDelay: node.delay }}
-        />
+        <span key={index} className="world-midnight-node" style={{ left: node.left, top: node.top, animationDelay: node.delay }} />
       ))}
       <div className="world-midnight-halo" />
     </>
@@ -130,9 +116,7 @@ function EmeraldWorld() {
       <div className="world-emerald-glow world-emerald-glow-b" />
       <div className="world-emerald-vine world-emerald-vine-a" />
       <div className="world-emerald-vine world-emerald-vine-b" />
-      {Array.from({ length: 8 }, (_, index) => (
-        <FallingShape key={index} index={index} type="leaf" />
-      ))}
+      {Array.from({ length: 8 }, (_, index) => <FallingShape key={index} index={index} type="leaf" />)}
     </>
   );
 }
@@ -143,9 +127,7 @@ function BlossomWorld() {
       <div className="world-blossom-glow world-blossom-glow-a" />
       <div className="world-blossom-glow world-blossom-glow-b" />
       <div className="world-blossom-branch" />
-      {Array.from({ length: 10 }, (_, index) => (
-        <FallingShape key={index} index={index} type="petal" />
-      ))}
+      {Array.from({ length: 10 }, (_, index) => <FallingShape key={index} index={index} type="petal" />)}
     </>
   );
 }
@@ -154,7 +136,7 @@ function CrimsonWorld() {
   const embers = Array.from({ length: 12 }, (_, index) => ({
     left: `${7 + ((index * 19) % 88)}%`,
     top: `${55 + ((index * 17) % 40)}%`,
-    delay: `${index * 0.65}s`,
+    delay: `${index * .65}s`,
     size: 2 + (index % 3),
   }));
 
@@ -164,40 +146,18 @@ function CrimsonWorld() {
       <div className="world-crimson-ring world-crimson-ring-a" />
       <div className="world-crimson-ring world-crimson-ring-b" />
       <div className="world-crimson-fractures" />
-      {embers.map((ember, index) => (
-        <span
-          key={index}
-          className="world-crimson-ember"
-          style={{
-            left: ember.left,
-            top: ember.top,
-            width: ember.size,
-            height: ember.size,
-            animationDelay: ember.delay,
-          }}
-        />
-      ))}
+      {embers.map((ember, index) => <span key={index} className="world-crimson-ember" style={{ left: ember.left, top: ember.top, width: ember.size, height: ember.size, animationDelay: ember.delay }} />)}
     </>
   );
 }
 
 export default function ThemeWorldBackground() {
   const { design } = useTheme();
-  const worlds = {
-    ocean: OceanWorld,
-    midnight: MidnightWorld,
-    light: LightWorld,
-    emerald: EmeraldWorld,
-    blossom: BlossomWorld,
-    crimson: CrimsonWorld,
-  };
+  const worlds = { ocean: OceanWorld, midnight: MidnightWorld, light: LightWorld, emerald: EmeraldWorld, blossom: BlossomWorld, crimson: CrimsonWorld };
   const World = worlds[design?.atmosphere?.type] ?? OceanWorld;
 
   return (
-    <div
-      className="theme-world-background pointer-events-none fixed inset-0 z-0 overflow-hidden"
-      aria-hidden="true"
-    >
+    <div className="theme-world-background pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
       <World />
       <div className="theme-world-bottom-fade" />
     </div>

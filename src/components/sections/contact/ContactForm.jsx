@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { sendContactEmail } from "../../../services/emailService";
 import { Reveal, Sequence, EntranceItem } from "../../ui/motion";
 import { Input, Textarea, SubmitButton } from "../../ui/form";
+import LivingCard from "../../ui/LivingCard";
 import useTheme from "../../../personalization/hooks/useTheme";
 
 function ContactForm() {
@@ -12,11 +13,14 @@ function ContactForm() {
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (event) => setFormData((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  const handleChange = (event) => {
+    setFormData((previous) => ({ ...previous, [event.target.name]: event.target.value }));
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const loadingToast = toast.loading("Sending your message...");
+
     try {
       setLoading(true);
       await sendContactEmail(formData);
@@ -32,7 +36,8 @@ function ContactForm() {
 
   return (
     <Reveal>
-      <motion.div whileHover={{ y: -2 }} className="theme-contact-form">
+      <LivingCard className="contact-living-card contact-living-card-form">
+        <div className="contact-form-orbit" aria-hidden="true" />
         <Sequence className="relative z-10 space-y-8">
           <EntranceItem>
             <p className="theme-contact-kicker">{copy.button ?? "START A CONVERSATION"}</p>
@@ -46,11 +51,13 @@ function ContactForm() {
               <Input label="Email Address" type="email" name="email" value={formData.email} onChange={handleChange} placeholder="john@example.com" required />
               <Input label="Subject" name="subject" value={formData.subject} onChange={handleChange} placeholder="Let's build something meaningful" required />
               <Textarea label="Message" name="message" value={formData.message} onChange={handleChange} placeholder="Tell me about your project..." rows={6} required />
-              <SubmitButton loading={loading}>Send Message</SubmitButton>
+              <motion.div whileHover={{ y: -2 }}>
+                <SubmitButton loading={loading}>Send Message</SubmitButton>
+              </motion.div>
             </form>
           </EntranceItem>
         </Sequence>
-      </motion.div>
+      </LivingCard>
     </Reveal>
   );
 }

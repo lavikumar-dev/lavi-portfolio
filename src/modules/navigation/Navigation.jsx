@@ -33,7 +33,6 @@ export default function Navigation() {
 
         setScrolled(currentScrollY > 20);
 
-        // Keep navbar visible near the top.
         if (currentScrollY <= 24) {
           setHidden(false);
           lastScrollY.current = currentScrollY;
@@ -43,13 +42,10 @@ export default function Navigation() {
 
         const delta = currentScrollY - previousScrollY;
 
-        // Ignore very small scroll movements.
         if (Math.abs(delta) >= 10) {
           if (delta > 0) {
-            // Scrolling down → slowly hide navbar.
             setHidden(true);
           } else {
-            // Scrolling up → slowly reveal navbar.
             setHidden(false);
           }
 
@@ -61,12 +57,9 @@ export default function Navigation() {
     };
 
     lastScrollY.current = window.scrollY;
-
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -86,7 +79,6 @@ export default function Navigation() {
     setHidden(false);
 
     const section = document.getElementById(id);
-
     if (!section) return;
 
     section.scrollIntoView({

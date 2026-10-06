@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   FaArrowRight,
@@ -27,6 +27,7 @@ import {
 } from "react-icons/si";
 
 import useTheme from "../../personalization/hooks/useTheme";
+import LivingCard from "../ui/LivingCard";
 import {
   attachUiAudioUnlock,
   playUiSound,
@@ -113,95 +114,6 @@ function SectionEyebrow({ children, className = "" }) {
   );
 }
 
-function useTiltCard() {
-  const ref = useRef(null);
-  const frame = useRef(0);
-  const target = useRef({ x: 0, y: 0, px: 50, py: 50 });
-  const current = useRef({ x: 0, y: 0, px: 50, py: 50 });
-  const reducedMotion = useReducedMotion();
-
-  const update = () => {
-    frame.current = 0;
-    const element = ref.current;
-    if (!element) return;
-
-    current.current.x += (target.current.x - current.current.x) * 0.16;
-    current.current.y += (target.current.y - current.current.y) * 0.16;
-    current.current.px += (target.current.px - current.current.px) * 0.18;
-    current.current.py += (target.current.py - current.current.py) * 0.18;
-
-    element.style.setProperty("--tilt-x", `${current.current.x.toFixed(3)}deg`);
-    element.style.setProperty("--tilt-y", `${current.current.y.toFixed(3)}deg`);
-    element.style.setProperty("--pointer-x", `${current.current.px.toFixed(2)}%`);
-    element.style.setProperty("--pointer-y", `${current.current.py.toFixed(2)}%`);
-
-    const settling =
-      Math.abs(target.current.x - current.current.x) > 0.01 ||
-      Math.abs(target.current.y - current.current.y) > 0.01 ||
-      Math.abs(target.current.px - current.current.px) > 0.02 ||
-      Math.abs(target.current.py - current.current.py) > 0.02;
-
-    if (settling) frame.current = requestAnimationFrame(update);
-  };
-
-  const onPointerMove = (event) => {
-    if (reducedMotion || !ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const px = ((event.clientX - rect.left) / rect.width) * 100;
-    const py = ((event.clientY - rect.top) / rect.height) * 100;
-    target.current = {
-      x: (50 - py) * 0.07,
-      y: (px - 50) * 0.08,
-      px,
-      py,
-    };
-    if (!frame.current) frame.current = requestAnimationFrame(update);
-  };
-
-  const onPointerLeave = () => {
-    target.current = { x: 0, y: 0, px: 50, py: 50 };
-    if (!frame.current) frame.current = requestAnimationFrame(update);
-  };
-
-  useEffect(() => () => {
-    if (frame.current) cancelAnimationFrame(frame.current);
-  }, []);
-
-  return { ref, onPointerMove, onPointerLeave };
-}
-
-function LivingCard({ children, className = "", onHover, onClick, interactive = false }) {
-  const tilt = useTiltCard();
-
-  return (
-    <div
-      ref={tilt.ref}
-      className={`about-living-card ${interactive ? "about-living-card-interactive" : ""} ${className}`}
-      onPointerMove={tilt.onPointerMove}
-      onPointerLeave={tilt.onPointerLeave}
-      onMouseEnter={onHover}
-      onFocus={onHover}
-      onClick={onClick}
-      role={interactive ? "button" : undefined}
-      tabIndex={interactive ? 0 : undefined}
-      onKeyDown={
-        interactive
-          ? (event) => {
-              if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                onClick?.();
-              }
-            }
-          : undefined
-      }
-    >
-      <div className="about-card-light" aria-hidden="true" />
-      <div className="about-card-sheen" aria-hidden="true" />
-      <div className="about-card-depth about-card-depth-back" aria-hidden="true" />
-      <div className="about-card-content">{children}</div>
-    </div>
-  );
-}
 
 function MountainArtifact() {
   return (

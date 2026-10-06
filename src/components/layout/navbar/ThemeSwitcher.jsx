@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaCheck, FaMoon, FaPalette, FaSun, FaWater } from "react-icons/fa";
+import { FaCheck, FaMoon, FaSun, FaWater } from "react-icons/fa";
 import useTheme from "../../../personalization/hooks/useTheme";
 
 const options = [

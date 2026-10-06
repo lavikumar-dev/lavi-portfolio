@@ -153,6 +153,10 @@ export default function ThemeProvider({ children }) {
       enterCrimsonSword,
       exitCrimsonSword,
       toggleEffect,
+      copy.hero,
+      copy.about,
+      copy.contact,
+      copy.projects,
     ]
   );
 
