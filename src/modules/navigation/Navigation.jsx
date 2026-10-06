@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 import { navigation } from "./config/navigation.config";
@@ -14,32 +14,62 @@ import Container from "../../shared/ui/Container";
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
   const activeSection = useActiveSection(navigation.links);
 
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
+
   useEffect(() => {
-    let frame = 0;
-    let lastState = null;
-
     const handleScroll = () => {
-      if (frame) return;
+      if (ticking.current) return;
 
-      frame = window.requestAnimationFrame(() => {
-        frame = 0;
-        const nextState = window.scrollY > 20;
+      ticking.current = true;
 
-        if (nextState !== lastState) {
-          lastState = nextState;
-          setScrolled(nextState);
+      window.requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+        const previousScrollY = lastScrollY.current;
+
+        setScrolled(currentScrollY > 20);
+
+        // Keep navbar visible near the top.
+        if (currentScrollY <= 24) {
+          setHidden(false);
+          lastScrollY.current = currentScrollY;
+          ticking.current = false;
+          return;
         }
+
+        const delta = currentScrollY - previousScrollY;
+
+        // Ignore very small scroll movements.
+        if (Math.abs(delta) >= 10) {
+          if (delta > 0) {
+            // Scrolling down → slowly hide navbar.
+            setHidden(true);
+          } else {
+            // Scrolling up → slowly reveal navbar.
+            setHidden(false);
+          }
+
+          lastScrollY.current = currentScrollY;
+        }
+
+        ticking.current = false;
       });
     };
 
+    lastScrollY.current = window.scrollY;
+
     handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);
 
@@ -53,8 +83,10 @@ export default function Navigation() {
 
   const navigate = (id) => {
     setMenuOpen(false);
+    setHidden(false);
 
     const section = document.getElementById(id);
+
     if (!section) return;
 
     section.scrollIntoView({
@@ -67,9 +99,18 @@ export default function Navigation() {
     <>
       <motion.header
         initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
+        animate={{
+          y: hidden ? -90 : 0,
+          opacity: hidden ? 0.15 : 1,
+        }}
+        transition={{
+          duration: 0.65,
+          ease: [0.22, 1, 0.36, 1],
+        }}
         className="fixed inset-x-0 top-0 z-50"
+        style={{
+          pointerEvents: hidden ? "none" : "auto",
+        }}
       >
         <Container>
           <nav

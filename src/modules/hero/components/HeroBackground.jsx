@@ -2,7 +2,7 @@ import ThemeHeroBackground from "./ThemeHeroBackground";
 
 export default function HeroBackground() {
   return (
-    <div className="absolute inset-0 -z-10 overflow-hidden">
+    <div className="theme-hero-background absolute inset-0 -z-10 overflow-hidden">
       <ThemeHeroBackground />
 
       <div
@@ -16,14 +16,16 @@ export default function HeroBackground() {
       <div
         className="absolute inset-x-0 top-0 h-44"
         style={{
-          background: "linear-gradient(to bottom, var(--bg-primary), transparent)",
+          background:
+            "linear-gradient(to bottom, var(--bg-primary), transparent)",
         }}
       />
 
       <div
-        className="absolute inset-x-0 bottom-0 h-64"
+        className="theme-hero-background-bottom-fade absolute inset-x-0 bottom-0 h-64"
         style={{
-          background: "linear-gradient(to top, var(--bg-primary), color-mix(in srgb, var(--bg-primary) 72%, transparent), transparent)",
+          background:
+            "linear-gradient(to top, var(--bg-primary), color-mix(in srgb, var(--bg-primary) 72%, transparent), transparent)",
         }}
       />
     </div>

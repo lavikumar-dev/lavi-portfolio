@@ -48,13 +48,24 @@ function EmeraldHero() {
         animate={{ rotate: [0, 8, -8, 0], y: [0, -14, 0] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         className="absolute right-[7%] top-[18%] h-40 w-24 rounded-[100%_0_100%_0] border"
-        style={{ borderColor: "var(--border)", background: "var(--accent-soft)" }}
+        style={{
+          borderColor: "var(--border)",
+          background: "var(--accent-soft)",
+        }}
       />
       <motion.div
         animate={{ rotate: [0, -10, 10, 0], y: [0, 12, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1,
+        }}
         className="absolute left-[8%] bottom-[14%] h-32 w-20 rounded-[100%_0_100%_0] border"
-        style={{ borderColor: "var(--border)", background: "var(--accent-soft)" }}
+        style={{
+          borderColor: "var(--border)",
+          background: "var(--accent-soft)",
+        }}
       />
     </>
   );
@@ -64,7 +75,7 @@ function BlossomHero() {
   return (
     <>
       <motion.div
-        animate={{ scale: [1, 1.08, 1], opacity: [0.10, 0.22, 0.10] }}
+        animate={{ scale: [1, 1.08, 1], opacity: [0.1, 0.22, 0.1] }}
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         className="absolute left-1/2 top-1/2 h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[170px]"
         style={{ background: "var(--glow)" }}
@@ -80,8 +91,17 @@ function BlossomHero() {
             opacity: 0.14,
             rotate: index * 35,
           }}
-          animate={{ y: [0, -18, 0], x: [0, 8, 0], rotate: [index * 35, index * 35 + 20, index * 35] }}
-          transition={{ duration: 6 + index % 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.35 }}
+          animate={{
+            y: [0, -18, 0],
+            x: [0, 8, 0],
+            rotate: [index * 35, index * 35 + 20, index * 35],
+          }}
+          transition={{
+            duration: 6 + (index % 4),
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: index * 0.35,
+          }}
         />
       ))}
     </>
@@ -105,7 +125,11 @@ function CrimsonHero() {
       />
       <div
         className="absolute left-1/2 top-1/2 h-[1px] w-[72%] -translate-x-1/2 -translate-y-1/2"
-        style={{ background: "linear-gradient(90deg, transparent, var(--accent), transparent)", opacity: 0.24 }}
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, var(--accent), transparent)",
+          opacity: 0.24,
+        }}
       />
     </>
   );
@@ -117,7 +141,7 @@ export default function ThemeHeroBackground() {
   if (design.atmosphere.type === "ocean") {
     return (
       <>
-        <div className="absolute inset-0 bg-[var(--bg-primary)]" />
+        <div className="theme-hero-background-base absolute inset-0 bg-[var(--bg-primary)]" />
         <OceanEngine />
       </>
     );
@@ -135,7 +159,7 @@ export default function ThemeHeroBackground() {
 
   return (
     <>
-      <div className="absolute inset-0 bg-[var(--bg-primary)]" />
+      <div className="theme-hero-background-base absolute inset-0 bg-[var(--bg-primary)]" />
       <Background />
     </>
   );

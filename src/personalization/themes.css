@@ -172,9 +172,12 @@
   backdrop-filter: blur(16px);
 }
 
-.navbar-scrolled {
+ .navbar-scrolled {
   backdrop-filter: blur(24px);
-  box-shadow: 0 18px 45px var(--glow);
+
+  box-shadow:
+    0 18px 45px color-mix(in srgb, var(--glow) 45%, transparent),
+    0 0 28px color-mix(in srgb, var(--glow) 16%, transparent);
 }
 
 .nav-icon {
@@ -2333,52 +2336,900 @@ html.is-scrolling .world-crimson-ember {
   }
 }
 
-/* Focused atmosphere polish for the three currently selectable themes.
-   All colors are inherited from semantic theme tokens. */
-[data-theme="ocean"] .world-ocean-grid {
-  opacity: 0.78;
+/* =========================================================
+   HIGH-INTENSITY THEME ATMOSPHERE
+   Ocean / Midnight / Light
+   Preserves the existing layout and world architecture.
+========================================================= */
+
+/* ---------- Ocean ---------- */
+
+[data-theme="ocean"] {
+  --theme-intensity: 1;
 }
-[data-theme="ocean"] .world-ocean-arc {
-  border-color: color-mix(in srgb, var(--accent) 34%, transparent);
-}
-[data-theme="ocean"] .world-ocean-bubble {
-  box-shadow:
-    0 0 10px var(--glow),
-    0 0 22px color-mix(in srgb, var(--accent) 42%, transparent);
-}
-[data-theme="ocean"] .world-ocean-glow {
+
+[data-theme="ocean"] .theme-ambient-ocean-a {
   opacity: 0.28;
 }
 
-[data-theme="midnight"] .world-midnight-grid {
-  opacity: 0.7;
+[data-theme="ocean"] .theme-ambient-ocean-b {
+  opacity: 0.18;
 }
-[data-theme="midnight"] .world-midnight-node {
+
+[data-theme="ocean"] .ocean-particle,
+[data-theme="ocean"] .theme-scene-ocean-particle {
   box-shadow:
-    0 0 9px var(--accent),
-    0 0 22px var(--glow);
+    0 0 10px var(--accent),
+    0 0 24px var(--glow);
+}
+
+[data-theme="ocean"] .ocean-mesh-node {
+  opacity: 0.72;
+  box-shadow:
+    0 0 8px var(--accent),
+    0 0 20px var(--glow);
+}
+
+[data-theme="ocean"] .ocean-grid-glow {
+  opacity: 0.26;
+}
+
+[data-theme="ocean"] .world-ocean-grid {
+  opacity: 0.86;
+}
+
+[data-theme="ocean"] .world-ocean-arc {
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+}
+
+[data-theme="ocean"] .world-ocean-bubble {
+  box-shadow:
+    0 0 10px var(--glow),
+    0 0 22px color-mix(in srgb, var(--accent) 52%, transparent);
+  opacity: 0.48;
+}
+
+[data-theme="ocean"] .world-ocean-glow {
+  opacity: 0.34;
+}
+
+[data-theme="ocean"] .theme-scene-ocean-grid {
+  opacity: 0.72;
+}
+
+[data-theme="ocean"] .theme-scene-ocean-orbit {
+  border-color: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+[data-theme="ocean"] .theme-scene-ocean-current {
+  opacity: 0.58;
+}
+
+
+/* ---------- Midnight / OLED ---------- */
+
+[data-theme="midnight"] {
+  --theme-intensity: 1;
+}
+
+[data-theme="midnight"] .theme-ambient {
+  opacity: 0.9;
+}
+
+[data-theme="midnight"] .theme-ambient-ocean-a,
+[data-theme="midnight"] .theme-ambient-ocean-b {
+  opacity: 0;
+}
+
+[data-theme="midnight"] .theme-star {
+  filter:
+    drop-shadow(0 0 5px var(--accent))
+    drop-shadow(0 0 12px var(--glow));
+}
+
+[data-theme="midnight"] .world-midnight-grid {
+  opacity: 0.78;
+}
+
+[data-theme="midnight"] .world-midnight-node,
+[data-theme="midnight"] .theme-scene-midnight-node {
+  opacity: 0.95;
+
+  box-shadow:
+    0 0 8px var(--accent),
+    0 0 20px var(--accent),
+    0 0 42px var(--glow);
+}
+
+[data-theme="midnight"] .world-midnight-halo {
+  opacity: 0.42;
+}
+
+[data-theme="midnight"] .world-midnight-network {
+  opacity: 0.9;
+}
+
+[data-theme="midnight"] .theme-scene-midnight-plane {
+  border-color: color-mix(in srgb, var(--accent) 14%, transparent);
   opacity: 0.82;
 }
-[data-theme="midnight"] .world-midnight-halo {
-  opacity: 0.32;
+
+[data-theme="midnight"] .theme-project-hover-glow,
+[data-theme="midnight"] .theme-project-image-aura {
+  opacity: 1;
 }
-[data-theme="midnight"] .world-midnight-network {
-  opacity: 0.8;
+
+
+/* ---------- Light ---------- */
+
+[data-theme="light"] {
+  --theme-intensity: 1;
+}
+
+[data-theme="light"] .theme-ambient-light {
+  opacity: 0.28;
 }
 
 [data-theme="light"] .world-light-grid {
-  opacity: 0.7;
+  opacity: 0.76;
 }
+
 [data-theme="light"] .world-light-glow {
-  opacity: 0.5;
+  opacity: 0.65;
 }
+
 [data-theme="light"] .world-light-architecture {
-  border-color: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
 }
+
+[data-theme="light"] .theme-scene-light-plane {
+  border-color: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+[data-theme="light"] .theme-scene-light-line {
+  opacity: 0.24;
+}
+
+[data-theme="light"] .theme-scene-light-glow {
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 16%, transparent),
+    transparent 65%
+  );
+}
+
+[data-theme="light"] .theme-project-hover-glow {
+  opacity: 0.75;
+}
+
+
+/* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
   [data-theme] .world-ocean-bubble,
-  [data-theme] .world-midnight-node {
+  [data-theme] .world-midnight-node,
+  [data-theme] .theme-scene-ocean-orbit,
+  [data-theme] .theme-scene-ocean-particle,
+  [data-theme] .theme-scene-midnight-node {
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   OCEAN — CONTINUOUS CANVAS POLISH
+   Keeps the orbital geometry behind page content while
+   reducing the grid and removing visible section boundaries.
+========================================================= */
+
+/* The fixed Ocean world remains the continuous backdrop. */
+[data-theme="ocean"] .world-ocean-grid {
+  opacity: 0.12;
+  background-size: 100px 100px;
+}
+
+/* Keep the large backdrop arcs atmospheric rather than structural. */
+[data-theme="ocean"] .world-ocean-arc {
+  border-color: color-mix(in srgb, var(--accent) 18%, transparent);
+  box-shadow: 0 0 26px color-mix(in srgb, var(--glow) 7%, transparent);
+}
+
+/* Section worlds blend into the same continuous Ocean canvas. */
+[data-theme="ocean"] .theme-section-world::after {
+  opacity: 0;
+}
+
+[data-theme="ocean"] .theme-section-world-grain {
+  opacity: 0.02;
+}
+
+/* The grid becomes a quiet texture instead of a dominant pattern. */
+[data-theme="ocean"] .theme-scene-ocean-grid {
+  opacity: 0.11;
+  background-size: 100px 100px;
+}
+
+/* Existing orbital geometry remains behind the page content.
+   It is intentionally large, clipped by the viewport, and slow. */
+[data-theme="ocean"] .theme-scene-ocean-orbit {
+  border-color: color-mix(in srgb, var(--accent) 20%, transparent);
+  box-shadow:
+    0 0 24px color-mix(in srgb, var(--glow) 9%, transparent),
+    inset 0 0 24px color-mix(in srgb, var(--glow) 3%, transparent);
+  will-change: transform, box-shadow, opacity;
+}
+
+[data-theme="ocean"] .theme-scene-ocean-orbit-a {
+  animation:
+    theme-orbit-spin 68s linear infinite,
+    theme-ocean-orbit-breathe 8s ease-in-out infinite;
+}
+
+[data-theme="ocean"] .theme-scene-ocean-orbit-b {
+  animation:
+    theme-orbit-spin 52s linear infinite reverse,
+    theme-ocean-orbit-breathe 10s ease-in-out -2s infinite;
+}
+
+@keyframes theme-ocean-orbit-breathe {
+  0%,
+  100% {
+    opacity: 0.68;
+    box-shadow:
+      0 0 18px color-mix(in srgb, var(--glow) 6%, transparent),
+      inset 0 0 18px color-mix(in srgb, var(--glow) 2%, transparent);
+  }
+  50% {
+    opacity: 0.95;
+    box-shadow:
+      0 0 30px color-mix(in srgb, var(--glow) 12%, transparent),
+      inset 0 0 30px color-mix(in srgb, var(--glow) 4%, transparent);
+  }
+}
+
+/* Keep the existing Ocean current subtle while the orbit carries the scene. */
+[data-theme="ocean"] .theme-scene-ocean-current {
+  opacity: 0.28;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="ocean"] .theme-scene-ocean-orbit-a,
+  [data-theme="ocean"] .theme-scene-ocean-orbit-b {
+    animation: none !important;
+  }
+}
+
+
+
+/* =========================================================
+   OCEAN CONTINUOUS CANVAS — GLOBAL ORBITAL BACKDROP
+   The orbital geometry belongs to the global fixed atmosphere,
+   not to individual sections.
+========================================================= */
+
+/* Remove section-local visual planes that create page-like partitions. */
+[data-theme="ocean"] .about-world-ocean,
+[data-theme="ocean"] .theme-skills,
+[data-theme="ocean"] .theme-contact {
+  background: transparent !important;
+}
+
+[data-theme="ocean"] .about-world-ocean::before,
+[data-theme="ocean"] .about-world-ocean::after {
+  background: none !important;
+  opacity: 0 !important;
+}
+
+[data-theme="ocean"] .about-world-ocean .about-world-noise,
+[data-theme="ocean"] .about-world-ocean .about-world-vignette {
+  opacity: 0.015;
+}
+
+/* Projects has a second grid layer outside ThemeSectionWorld. */
+[data-theme="ocean"] .projects-world-grid {
+  opacity: 0.06;
+}
+
+/* Hide the section-local Ocean orbit copies.
+   The real orbit now lives in the fixed global atmosphere. */
+[data-theme="ocean"] .theme-section-world-ocean .theme-scene-ocean-orbit {
+  display: none;
+}
+
+/* The global atmosphere carries the large geometry continuously
+   while the page scrolls over it. */
+[data-theme="ocean"] .theme-world-background::before,
+[data-theme="ocean"] .theme-world-background::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 34%;
+  border: 1px solid color-mix(in srgb, var(--accent) 19%, transparent);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+  box-shadow:
+    0 0 24px color-mix(in srgb, var(--glow) 9%, transparent),
+    inset 0 0 28px color-mix(in srgb, var(--glow) 2%, transparent);
+}
+
+[data-theme="ocean"] .theme-world-background::before {
+  width: 76vw;
+  height: 76vw;
+  left: 74%;
+  top: 30%;
+  animation:
+    ocean-global-orbit-a 68s linear infinite,
+    ocean-global-orbit-breathe 9s ease-in-out infinite;
+}
+
+[data-theme="ocean"] .theme-world-background::after {
+  width: 46vw;
+  height: 46vw;
+  left: 82%;
+  top: 48%;
+  animation:
+    ocean-global-orbit-b 52s linear infinite reverse,
+    ocean-global-orbit-breathe 11s ease-in-out -2s infinite;
+}
+
+@keyframes ocean-global-orbit-a {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes ocean-global-orbit-b {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes ocean-global-orbit-breathe {
+  0%,
+  100% {
+    opacity: 0.52;
+    box-shadow:
+      0 0 18px color-mix(in srgb, var(--glow) 5%, transparent),
+      inset 0 0 18px color-mix(in srgb, var(--glow) 1%, transparent);
+  }
+  50% {
+    opacity: 0.82;
+    box-shadow:
+      0 0 34px color-mix(in srgb, var(--glow) 12%, transparent),
+      inset 0 0 28px color-mix(in srgb, var(--glow) 4%, transparent);
+  }
+}
+
+/* Quiet the remaining section texture. */
+[data-theme="ocean"] .theme-section-world-grain {
+  opacity: 0.012;
+}
+
+[data-theme="ocean"] .theme-scene-ocean-grid,
+[data-theme="ocean"] .projects-world-grid {
+  background-image: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="ocean"] .theme-world-background::before,
+  [data-theme="ocean"] .theme-world-background::after {
+    animation: none !important;
+  }
+}
+
+
+/* =========================================================
+   OCEAN CONTINUOUS CANVAS — V3
+   1. Soft hero → page transition
+   2. Global orbit motion that is actually visible
+   3. One continuous orbital system; no section duplicates
+========================================================= */
+
+/* ---- 1. HERO TO PAGE TRANSITION ---- */
+
+[data-theme="ocean"] #home {
+  background: transparent !important;
+}
+
+/* The hero's solid backdrop is allowed to dissolve at its lower edge.
+   The global Ocean atmosphere then becomes visible underneath it. */
+[data-theme="ocean"] .theme-hero-background {
+  background: transparent !important;
+}
+
+[data-theme="ocean"] .theme-hero-background-base {
+  background:
+    linear-gradient(
+      to bottom,
+      var(--bg-primary) 0%,
+      var(--bg-primary) 68%,
+      color-mix(in srgb, var(--bg-primary) 92%, transparent) 82%,
+      transparent 100%
+    ) !important;
+}
+
+/* Remove the old hard bottom fade; the transition below replaces it. */
+[data-theme="ocean"] .theme-hero-background-bottom-fade {
+  display: none !important;
+}
+
+/* A soft "source" bloom at the end of the hero.
+   It should read as the orbital field emerging from below the hero,
+   never as a horizontal divider. */
+[data-theme="ocean"] #home::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: -10%;
+  right: -10%;
+  bottom: -1px;
+  height: 260px;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 48% 42% at 50% 100%,
+      color-mix(in srgb, var(--accent) 13%, transparent) 0%,
+      color-mix(in srgb, var(--glow) 8%, transparent) 26%,
+      transparent 72%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      color-mix(in srgb, var(--bg-primary) 12%, transparent) 70%,
+      transparent 100%
+    );
+  filter: blur(2px);
+  opacity: 0.9;
+}
+
+/* ---- 2. GLOBAL ORBITAL SYSTEM ---- */
+
+/* The global fixed atmosphere is the only large Ocean orbit system.
+   Section-local orbit copies remain disabled. */
+[data-theme="ocean"] .theme-section-world-ocean .theme-scene-ocean-orbit,
+[data-theme="ocean"] .theme-section-world-ocean .theme-scene-ocean-grid {
+  display: none !important;
+}
+
+/* Make the fixed global atmosphere slightly more visible around
+   the hero → about transition without introducing another section. */
+[data-theme="ocean"] .theme-world-background {
+  overflow: visible;
+}
+
+/* Replace the invisible rotating border with a conic-gradient ring.
+   A normal circular border can rotate forever without looking like it moves.
+   The illuminated arc makes the rotation perceptible while keeping the
+   overall geometry restrained. */
+[data-theme="ocean"] .theme-world-background::before,
+[data-theme="ocean"] .theme-world-background::after {
+  border: 0;
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0deg 304deg,
+      color-mix(in srgb, var(--accent) 8%, transparent) 318deg,
+      color-mix(in srgb, var(--accent) 34%, transparent) 332deg,
+      color-mix(in srgb, var(--accent) 62%, transparent) 342deg,
+      color-mix(in srgb, var(--accent) 18%, transparent) 351deg,
+      transparent 358deg 360deg
+    );
+  -webkit-mask:
+    radial-gradient(
+      circle,
+      transparent 0 calc(100% - 2px),
+      #000 calc(100% - 1px) 100%
+    );
+  mask:
+    radial-gradient(
+      circle,
+      transparent 0 calc(100% - 2px),
+      #000 calc(100% - 1px) 100%
+    );
+  box-shadow:
+    0 0 22px color-mix(in srgb, var(--glow) 8%, transparent);
+  opacity: 0.64;
+}
+
+/* Second ring has a shorter, dimmer illuminated segment so the two
+   systems read as one orbital mechanism instead of two decorations. */
+[data-theme="ocean"] .theme-world-background::after {
+  opacity: 0.46;
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0deg 52deg,
+      color-mix(in srgb, var(--accent) 6%, transparent) 64deg,
+      color-mix(in srgb, var(--accent) 28%, transparent) 75deg,
+      color-mix(in srgb, var(--accent) 48%, transparent) 86deg,
+      color-mix(in srgb, var(--accent) 12%, transparent) 96deg,
+      transparent 106deg 360deg
+    );
+  -webkit-mask:
+    radial-gradient(
+      circle,
+      transparent 0 calc(100% - 2px),
+      #000 calc(100% - 1px) 100%
+    );
+  mask:
+    radial-gradient(
+      circle,
+      transparent 0 calc(100% - 2px),
+      #000 calc(100% - 1px) 100%
+    );
+}
+
+/* Keep the orbit animation genuinely slow and continuous. */
+[data-theme="ocean"] .theme-world-background::before {
+  animation:
+    ocean-global-orbit-a 72s linear infinite,
+    ocean-global-orbit-breathe 10s ease-in-out infinite;
+}
+
+[data-theme="ocean"] .theme-world-background::after {
+  animation:
+    ocean-global-orbit-b 54s linear infinite reverse,
+    ocean-global-orbit-breathe 13s ease-in-out -2s infinite;
+}
+
+/* ---- 3. CONNECT THE ORBIT FIELD TO THE HERO EDGE ---- */
+
+[data-theme="ocean"] .theme-world-background {
+  background:
+    radial-gradient(
+      ellipse 36% 20% at 50% 100%,
+      color-mix(in srgb, var(--glow) 8%, transparent),
+      transparent 72%
+    );
+}
+
+/* ---- 4. VERY QUIET SECTION TEXTURE ---- */
+
+[data-theme="ocean"] .projects-world-grid,
+[data-theme="ocean"] .theme-scene-ocean-grid {
+  display: none !important;
+}
+
+[data-theme="ocean"] .theme-section-world-grain {
+  opacity: 0.008 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="ocean"] .theme-world-background::before,
+  [data-theme="ocean"] .theme-world-background::after,
+  [data-theme="ocean"] #home::after {
+    animation: none !important;
+  }
+}
+
+/* The original fixed Ocean world arcs would duplicate the new orbital system.
+   Keep the atmospheric glows and bubbles, but let one orbital mechanism own
+   the large circular geometry. */
+[data-theme="ocean"] .world-ocean-arc-a,
+[data-theme="ocean"] .world-ocean-arc-b {
+  display: none !important;
+}
+
+[data-theme="ocean"] .world-ocean-grid {
+  display: none !important;
+}
+
+/* Let the remaining Ocean bubbles read as sparse ambient particles rather
+   than another geometric layer. */
+[data-theme="ocean"] .world-ocean-bubble {
+  opacity: 0.28;
+}
+
+/* =========================================================
+   OCEAN CONTINUOUS CANVAS — V4
+   Seamless section boundary + luminous 3D orbital field.
+   The orbit field is global and fixed, so it never restarts
+   when the page moves between sections.
+========================================================= */
+
+/* ---------------------------------------------------------
+   1. REMOVE THE LAST HORIZONTAL PAGE BREAK
+--------------------------------------------------------- */
+[data-theme="ocean"] .theme-world-bottom-fade {
+  display: none !important;
+}
+
+[data-theme="ocean"] #home::after {
+  display: none !important;
+}
+
+[data-theme="ocean"] #home,
+[data-theme="ocean"] .about-world,
+[data-theme="ocean"] .about-world-ocean,
+[data-theme="ocean"] .theme-section-world,
+[data-theme="ocean"] .projects-world,
+[data-theme="ocean"] .theme-skills,
+[data-theme="ocean"] .theme-contact {
+  background: transparent !important;
+}
+
+[data-theme="ocean"] .about-world::before,
+[data-theme="ocean"] .about-world::after,
+[data-theme="ocean"] .about-world-ocean::before,
+[data-theme="ocean"] .about-world-ocean::after,
+[data-theme="ocean"] .theme-section-world::after {
+  background: none !important;
+  opacity: 0 !important;
+}
+
+/* Keep a soft atmospheric light source without making a line. */
+[data-theme="ocean"] .theme-hero-background-base {
+  background:
+    radial-gradient(
+      ellipse 58% 34% at 52% 94%,
+      color-mix(in srgb, var(--accent) 7%, transparent),
+      transparent 72%
+    ),
+    linear-gradient(
+      to bottom,
+      var(--bg-primary) 0%,
+      var(--bg-primary) 60%,
+      color-mix(in srgb, var(--bg-primary) 78%, transparent) 82%,
+      transparent 100%
+    ) !important;
+}
+
+/* ---------------------------------------------------------
+   2. GLOBAL OCEAN ORBIT FIELD
+   One owner. No section-local copies.
+--------------------------------------------------------- */
+[data-theme="ocean"] .theme-world-background::before,
+[data-theme="ocean"] .theme-world-background::after {
+  display: none !important;
+}
+
+[data-theme="ocean"] .theme-world-background {
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(
+      ellipse 54% 32% at 50% 18%,
+      color-mix(in srgb, var(--accent) 5%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 58% 42% at 52% 88%,
+      color-mix(in srgb, var(--glow) 9%, transparent),
+      transparent 72%
+    );
+}
+
+[data-theme="ocean"] .world-ocean-grid,
+[data-theme="ocean"] .world-ocean-arc-a,
+[data-theme="ocean"] .world-ocean-arc-b,
+[data-theme="ocean"] .theme-scene-ocean-grid,
+[data-theme="ocean"] .theme-section-world-ocean .theme-scene-ocean-orbit,
+[data-theme="ocean"] .projects-world-grid {
+  display: none !important;
+}
+
+.world-ocean-orbit-field {
+  position: absolute;
+  inset: -16%;
+  z-index: 1;
+  pointer-events: none;
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+
+.world-ocean-orbit {
+  position: absolute;
+  left: 52%;
+  top: 50%;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 50%;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  background:
+    conic-gradient(
+      from 12deg,
+      transparent 0deg 205deg,
+      color-mix(in srgb, var(--accent) 7%, transparent) 218deg,
+      color-mix(in srgb, var(--accent) 48%, transparent) 234deg,
+      color-mix(in srgb, var(--accent) 12%, transparent) 248deg,
+      transparent 264deg 360deg
+    );
+  -webkit-mask: radial-gradient(ellipse at center, transparent calc(100% - 2px), #000 calc(100% - 1px));
+  mask: radial-gradient(ellipse at center, transparent calc(100% - 2px), #000 calc(100% - 1px));
+  box-shadow:
+    0 0 18px color-mix(in srgb, var(--glow) 12%, transparent),
+    0 0 58px color-mix(in srgb, var(--glow) 5%, transparent);
+  will-change: transform, opacity;
+}
+
+.world-ocean-orbit-a {
+  width: 118vw;
+  height: 62vw;
+  top: 48%;
+  transform: translate(-50%, -50%) rotateX(64deg) rotateZ(-18deg);
+  animation:
+    ocean-orbit-a 44s linear infinite,
+    ocean-orbit-breathe 8s ease-in-out infinite;
+}
+
+.world-ocean-orbit-b {
+  width: 88vw;
+  height: 43vw;
+  left: 48%;
+  top: 55%;
+  border-color: color-mix(in srgb, var(--accent) 22%, transparent);
+  background:
+    conic-gradient(
+      from 180deg,
+      transparent 0deg 72deg,
+      color-mix(in srgb, var(--accent) 6%, transparent) 88deg,
+      color-mix(in srgb, var(--accent) 38%, transparent) 103deg,
+      color-mix(in srgb, var(--accent) 9%, transparent) 116deg,
+      transparent 132deg 360deg
+    );
+  transform: translate(-50%, -50%) rotateX(68deg) rotateZ(28deg);
+  animation:
+    ocean-orbit-b 36s linear infinite reverse,
+    ocean-orbit-breathe 10s ease-in-out -2s infinite;
+}
+
+.world-ocean-orbit-c {
+  width: 66vw;
+  height: 31vw;
+  left: 58%;
+  top: 42%;
+  border-color: color-mix(in srgb, var(--accent) 18%, transparent);
+  background:
+    conic-gradient(
+      from 42deg,
+      transparent 0deg 300deg,
+      color-mix(in srgb, var(--accent) 5%, transparent) 312deg,
+      color-mix(in srgb, var(--accent) 30%, transparent) 326deg,
+      color-mix(in srgb, var(--accent) 7%, transparent) 340deg,
+      transparent 352deg 360deg
+    );
+  transform: translate(-50%, -50%) rotateX(70deg) rotateZ(-42deg);
+  animation:
+    ocean-orbit-c 29s linear infinite,
+    ocean-orbit-breathe 7s ease-in-out -1s infinite;
+}
+
+.world-ocean-orbit-glow {
+  position: absolute;
+  left: 51%;
+  top: 52%;
+  width: 64vw;
+  height: 32vw;
+  transform: translate(-50%, -50%) rotateX(68deg) rotateZ(-18deg);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    color-mix(in srgb, var(--accent) 9%, transparent),
+    transparent 66%
+  );
+  filter: blur(34px);
+  opacity: 0.58;
+  animation: ocean-orbit-halo 9s ease-in-out infinite;
+}
+
+/* Satellites create the visible motion cue that a plain ring lacks. */
+.world-ocean-satellite {
+  position: absolute;
+  left: 52%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow:
+    0 0 7px var(--accent),
+    0 0 20px var(--glow),
+    0 0 38px color-mix(in srgb, var(--glow) 60%, transparent);
+  will-change: transform, opacity;
+}
+
+.world-ocean-satellite span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: #bff9ff;
+  box-shadow: 0 0 8px #bff9ff;
+}
+
+.world-ocean-satellite-a {
+  animation: ocean-satellite-a 16s linear infinite;
+}
+
+.world-ocean-satellite-b {
+  animation: ocean-satellite-b 22s linear infinite reverse;
+}
+
+.world-ocean-satellite-c {
+  animation: ocean-satellite-c 27s linear infinite;
+}
+
+.world-ocean-satellite-d {
+  animation: ocean-satellite-d 34s linear infinite reverse;
+}
+
+@keyframes ocean-orbit-a {
+  from { transform: translate(-50%, -50%) rotateX(64deg) rotateZ(-18deg); }
+  to { transform: translate(-50%, -50%) rotateX(64deg) rotateZ(342deg); }
+}
+
+@keyframes ocean-orbit-b {
+  from { transform: translate(-50%, -50%) rotateX(68deg) rotateZ(28deg); }
+  to { transform: translate(-50%, -50%) rotateX(68deg) rotateZ(388deg); }
+}
+
+@keyframes ocean-orbit-c {
+  from { transform: translate(-50%, -50%) rotateX(70deg) rotateZ(-42deg); }
+  to { transform: translate(-50%, -50%) rotateX(70deg) rotateZ(318deg); }
+}
+
+@keyframes ocean-orbit-breathe {
+  0%, 100% { opacity: .42; filter: saturate(.95); }
+  50% { opacity: .82; filter: saturate(1.22); }
+}
+
+@keyframes ocean-orbit-halo {
+  0%, 100% { opacity: .34; transform: translate(-50%, -50%) rotateX(68deg) rotateZ(-18deg) scale(.96); }
+  50% { opacity: .62; transform: translate(-50%, -50%) rotateX(68deg) rotateZ(-12deg) scale(1.035); }
+}
+
+@keyframes ocean-satellite-a {
+  from { transform: translate(-50%, -50%) rotate(0deg) translateX(59vw) translateY(0) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg) translateX(59vw) translateY(0) rotate(-360deg); }
+}
+
+@keyframes ocean-satellite-b {
+  from { transform: translate(-50%, -50%) rotate(55deg) translateX(43vw) translateY(0) rotate(-55deg); }
+  to { transform: translate(-50%, -50%) rotate(-305deg) translateX(43vw) translateY(0) rotate(305deg); }
+}
+
+@keyframes ocean-satellite-c {
+  from { transform: translate(-50%, -50%) rotate(170deg) translateX(32vw) translateY(0) rotate(-170deg); }
+  to { transform: translate(-50%, -50%) rotate(530deg) translateX(32vw) translateY(0) rotate(-530deg); }
+}
+
+@keyframes ocean-satellite-d {
+  from { transform: translate(-50%, -50%) rotate(245deg) translateX(45vw) translateY(0) rotate(-245deg); }
+  to { transform: translate(-50%, -50%) rotate(-115deg) translateX(45vw) translateY(0) rotate(115deg); }
+}
+
+[data-theme="ocean"] .world-ocean-bubble {
+  opacity: .38;
+  box-shadow:
+    0 0 8px var(--accent),
+    0 0 20px var(--glow),
+    0 0 34px color-mix(in srgb, var(--glow) 42%, transparent);
+}
+
+[data-theme="ocean"] .world-ocean-glow-a {
+  opacity: .20;
+}
+
+[data-theme="ocean"] .world-ocean-glow-b {
+  opacity: .13;
+}
+
+[data-theme="ocean"] .theme-section-world-grain {
+  opacity: .006 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="ocean"] .world-ocean-orbit,
+  [data-theme="ocean"] .world-ocean-orbit-glow,
+  [data-theme="ocean"] .world-ocean-satellite,
+  [data-theme="ocean"] .world-ocean-bubble {
     animation: none !important;
   }
 }
