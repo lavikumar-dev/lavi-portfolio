@@ -24,7 +24,7 @@ export default function CursorTrail() {
 
   return (
     <motion.div
-      className="pointer-events-none fixed left-0 top-0 z-[9995] rounded-full"
+      className="cursor-trail pointer-events-none fixed left-0 top-0 z-[9995] rounded-full"
       style={{
         width: design.cursor.trail === "minimal" ? 56 : 76,
         height: design.cursor.trail === "minimal" ? 56 : 76,
