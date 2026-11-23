@@ -13,6 +13,7 @@ function ProjectCard({ project, index = 0, active = false, onCaseStudy }) {
       initial={false}
       className={`project-carousel-item ${active ? "is-active" : ""}`}
       onMouseLeave={() => setHovered(false)}
+      aria-label={`${project.title}, project ${index + 1}`}
     >
       <LivingCard
         className="project-showcase-card"
@@ -26,6 +27,8 @@ function ProjectCard({ project, index = 0, active = false, onCaseStudy }) {
           <motion.img
             src={project.image}
             alt={`${project.title} project preview`}
+            loading="lazy"
+            decoding="async"
             animate={{ scale: hovered ? 1.045 : 1 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="project-showcase-image"

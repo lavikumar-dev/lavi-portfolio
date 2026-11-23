@@ -1,0 +1,181 @@
+/*
+ * Targeted performance and interaction overrides.
+ * Keep the portfolio's visual language while reducing expensive
+ * decorative work during scrolling and ensuring carousel controls
+ * remain above transformed slide cards.
+ */
+
+.projects-carousel-wrap {
+  isolation: isolate;
+}
+
+.projects-carousel {
+  position: relative;
+  z-index: 1;
+  scroll-padding-inline: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.project-carousel-item {
+  backface-visibility: hidden;
+}
+
+.projects-carousel-control {
+  z-index: 120;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+.projects-carousel-control:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.projects-carousel-hint {
+  min-height: 1.25rem;
+}
+
+/* Avoid forcing every decorative node onto its own compositor layer. */
+.theme-ambient,
+.theme-falling-shape,
+.theme-star,
+.theme-crimson-ring,
+.ocean-particle,
+.ocean-mesh-node,
+.ocean-glow,
+.ocean-grid-glow,
+.world-ocean-glow,
+.world-ocean-bubble,
+.world-midnight-node,
+.world-falling-shape,
+.world-emerald-glow,
+.world-blossom-glow,
+.world-crimson-ring,
+.world-crimson-ember,
+.world-ocean-orbit,
+.world-ocean-orbit-glow,
+.world-ocean-satellite,
+.theme-scene-ocean-orbit,
+.theme-scene-ocean-particle,
+.theme-scene-midnight-node,
+.theme-scene-leaf,
+.theme-scene-petal,
+.theme-scene-crimson-ember {
+  will-change: auto;
+}
+
+/* Pause decorative loops while the user is actively scrolling. */
+html.is-scrolling .theme-ambient,
+html.is-scrolling .theme-falling-shape,
+html.is-scrolling .theme-star,
+html.is-scrolling .theme-crimson-ring,
+html.is-scrolling .ocean-particle,
+html.is-scrolling .ocean-mesh-node,
+html.is-scrolling .ocean-glow,
+html.is-scrolling .ocean-grid-glow,
+html.is-scrolling .world-ocean-glow,
+html.is-scrolling .world-ocean-bubble,
+html.is-scrolling .world-midnight-node,
+html.is-scrolling .world-falling-shape,
+html.is-scrolling .world-emerald-glow,
+html.is-scrolling .world-blossom-glow,
+html.is-scrolling .world-crimson-ring,
+html.is-scrolling .world-crimson-ember,
+html.is-scrolling .world-ocean-orbit,
+html.is-scrolling .world-ocean-orbit-glow,
+html.is-scrolling .world-ocean-satellite,
+html.is-scrolling .theme-scene-ocean-orbit,
+html.is-scrolling .theme-scene-ocean-particle,
+html.is-scrolling .theme-scene-midnight-node,
+html.is-scrolling .theme-scene-leaf,
+html.is-scrolling .theme-scene-petal,
+html.is-scrolling .theme-scene-crimson-ember,
+html.is-scrolling .world-ocean-orbit-field *,
+html.is-scrolling .world-ocean-orbit-field,
+html.is-scrolling .theme-scene-ocean-orbit,
+html.is-scrolling .theme-scene-ocean-particle,
+html.is-scrolling .theme-contact-status span,
+html.is-scrolling .theme-contact-status {
+  animation-play-state: paused !important;
+}
+
+/* Cursor trail's idle pulse is decorative, not essential feedback. */
+html.is-scrolling .cursor-trail {
+  animation-play-state: paused !important;
+}
+
+@media (max-width: 767px) {
+  .projects-carousel-control {
+    width: 42px;
+    height: 42px;
+  }
+
+  .project-carousel-item {
+    padding-inline: 2.5rem;
+  }
+
+  .project-showcase-body {
+    padding: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-carousel {
+    scroll-behavior: auto;
+  }
+
+  .project-carousel-item {
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .projects-carousel-control,
+  .project-showcase-image,
+  .project-showcase-arrow {
+    transition: none !important;
+  }
+
+  .theme-ambient,
+  .theme-falling-shape,
+  .theme-star,
+  .theme-crimson-ring,
+  .ocean-particle,
+  .ocean-mesh-node,
+  .ocean-glow,
+  .ocean-grid-glow,
+  .world-ocean-glow,
+  .world-ocean-bubble,
+  .world-midnight-node,
+  .world-falling-shape,
+  .world-emerald-glow,
+  .world-blossom-glow,
+  .world-crimson-ring,
+  .world-crimson-ember,
+  .world-ocean-orbit,
+  .world-ocean-orbit-glow,
+  .world-ocean-satellite,
+  .theme-scene-ocean-orbit,
+  .theme-scene-ocean-particle,
+  .theme-scene-midnight-node,
+  .theme-scene-leaf,
+  .theme-scene-petal,
+  .theme-scene-crimson-ember,
+  .theme-contact-status span {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .world-ocean-glow,
+  .world-emerald-glow,
+  .world-blossom-glow,
+  .world-crimson-heat,
+  .world-midnight-halo {
+    filter: blur(72px);
+  }
+
+  .world-ocean-orbit-glow {
+    filter: blur(22px);
+  }
+}
