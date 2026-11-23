@@ -65,6 +65,9 @@ function HeroImage() {
         <img
           src={heroImage}
           alt={portfolio.name}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           className="
             relative
             z-10
