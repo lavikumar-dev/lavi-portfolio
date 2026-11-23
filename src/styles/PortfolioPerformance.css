@@ -100,7 +100,7 @@ html.is-scrolling .theme-contact-status {
 }
 
 /* Cursor trail's idle pulse is decorative, not essential feedback. */
-html.is-scrolling .fixed.rounded-full {
+html.is-scrolling .cursor-trail {
   animation-play-state: paused !important;
 }
 
@@ -163,5 +163,19 @@ html.is-scrolling .fixed.rounded-full {
   .theme-scene-crimson-ember,
   .theme-contact-status span {
     animation: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .world-ocean-glow,
+  .world-emerald-glow,
+  .world-blossom-glow,
+  .world-crimson-heat,
+  .world-midnight-halo {
+    filter: blur(72px);
+  }
+
+  .world-ocean-orbit-glow {
+    filter: blur(22px);
   }
 }
